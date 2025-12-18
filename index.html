@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Project: Library</title>
 </head>
 <body>
     <div class="newButton">
-        <button id="addBook">Add New Book</button>
+        <button class="addBook" onclick="addBook()">Add New Book</button>
+        <div id="inputFields"></div>
     </div>
+    <div class="questions"></div>
+        <p id="questionTitle"></p>
+        <p id="questionAuthor"></p>
+        <p id="questionPages"></p>
+        <p id="questionRead"></p>
+    <div class="library"></div>
 </body>
 </html>

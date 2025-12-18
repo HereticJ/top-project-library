@@ -10,6 +10,14 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary() {
+const library = document.querySelector("library");
+
+newButton.addEventListener("click", () => {
+
+});
+
+function addFn() {
     // take params, create a book then store it in the array.
 }
+
+const Fireworks = new Book('Fireworks', 'Josh Grant', '14287 pages', 'no')
