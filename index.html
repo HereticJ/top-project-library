@@ -8,15 +8,29 @@
     <title>Project: Library</title>
 </head>
 <body>
-    <div class="newButton">
-        <button class="addBook" onclick="addBook()">Add New Book</button>
-        <div id="inputFields"></div>
+    <div id="newButton">
+        <button class="addBook" onclick="addBookToLibrary()">Add New Book</button>
     </div>
-    <div class="questions"></div>
-        <p id="questionTitle"></p>
-        <p id="questionAuthor"></p>
-        <p id="questionPages"></p>
-        <p id="questionRead"></p>
-    <div class="library"></div>
+    <div id="questions" class="formContainer">
+        <h2>Add a Book</h2>
+            <form id="questionForm" name="questionForm">
+                <label for="bookTitle">Title:</label>
+                <input type="text" id="bookTitle" name="bookTitle">
+                <br>
+                <label for="bookAuthor">Author:</label>
+                <input type="text" id="bookAuthor" name="bookAuthor">
+                <br>
+                <label for="pageNum"># of Pages:</label>
+                <input type="number" name=pageNum step="1" min="1" max="20000">
+                <label for="userRead">Have you read this book?</label>
+                <input type="radio" id="yes" name="yes" value="Yes">
+                <label for="yes">Yes</label><br>
+                <input type="radio" id="no" name="no" value="No">
+                <label for="no">No</label>
+            </form>
+    </div>
+    <div id="library">
+
+    </div>
 </body>
 </html>
