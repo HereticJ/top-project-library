@@ -1,8 +1,17 @@
 const myLibrary = [];
-const questionsForm = document.createElement("input");
+const newButton = document.querySelector("#newButton");
+const questions = document.querySelector("#questions");
+const submitButton = document.querySelector("#submit");
+const title = document.querySelector("#bookTitle");
+const author = document.querySelector("#bookAuthor");
+const pages = document.querySelector("#pageNum");
+const read = document.querySelector("#userRead");
 
-newButton = document.querySelector("#newButton");
-questions = document.querySelector("#questions");
+questions.style.display = 'none';
+
+newButton.addEventListener("click", () => {
+    questions.style.display = 'block';
+});
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -19,13 +28,13 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
     // take params, create a book then store it in the array.
-    const form = document.querySelector("#questionForm")
-}
+    submitButton.addEventListener('click', () => {
+        let userBook = new Book(`${title.value}`, `${author.value}`,
+            `${pages.value}`, `${read.value}`);
+            myLibrary += `userBook`;
+    });
+};
 
-newButton.addEventListener("click", () => {
-    questions.appendChild("questions")
 
-});
 
-const Fireworks = new Book('Fireworks', 'Josh Grant', '14287 pages', 'no');
-Fireworks.sayTitle();
+console.log(myLibrary[0]);
