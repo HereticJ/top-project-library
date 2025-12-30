@@ -6,12 +6,8 @@ const title = document.querySelector("#bookTitle");
 const author = document.querySelector("#bookAuthor");
 const pages = document.querySelector("#pageNum");
 const read = document.querySelector("#userRead");
+const dialog = document.querySelector("dialog");
 
-questions.style.display = 'none';
-
-newButton.addEventListener("click", () => {
-    questions.style.display = 'block';
-});
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -27,14 +23,28 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
+    dialog.showModal();
+};
+
+console.log(myLibrary[0]);
+
+/*
+FROM ADDTOLIBRARY FUNCTION
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
         let userBook = new Book(`${title.value}`, `${author.value}`,
             `${pages.value}`, `${read.value}`);
             myLibrary += `userBook`;
     });
-};
 
 
 
-console.log(myLibrary[0]);
+
+
+FROM NON-MODAL HIDE/SHOW FORM.
+questions.style.display = 'none';
+
+newButton.addEventListener("click", () => {
+    questions.style.display = 'block';
+});
+*/
