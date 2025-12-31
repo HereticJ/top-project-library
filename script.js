@@ -1,12 +1,12 @@
-const myLibrary = [];
+let myLibrary = [];
 const newButton = document.querySelector("#newButton");
 const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
-const title = document.querySelector("#bookTitle");
-const author = document.querySelector("#bookAuthor");
-const pages = document.querySelector("#pageNum");
-const read = document.querySelector("#userRead");
 const dialog = document.querySelector("dialog");
+let title = document.querySelector("#bookTitle");
+let author = document.querySelector("#bookAuthor");
+let pages = document.querySelector("#pageNum");
+let read = document.querySelector("#userRead");
 
 
 function Book(title, author, pages, read) {
@@ -16,35 +16,30 @@ function Book(title, author, pages, read) {
     this.title = title,
     this.author = author,
     this.pages = pages,
-    this.read = read;
+    this.read = read
+    /*
         this.sayTitle = function() {
-            console.log(this.title)
-        };
-}
+            console.log(`${this.title} added.`);
+        }
+    */
+};
 
 function addBookToLibrary() {
     dialog.showModal();
-};
-
-console.log(myLibrary[0]);
-
-/*
-FROM ADDTOLIBRARY FUNCTION
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
-        let userBook = new Book(`${title.value}`, `${author.value}`,
-            `${pages.value}`, `${read.value}`);
-            myLibrary += `userBook`;
+        let userBook = `${title.value}`.crypto.randomUUID() = new Book(`${title.value}`, 
+            `${author.value}`,`${pages.value}`, `${read.value}`);
+            myLibrary.push(userBook);
     });
+};
 
+function bookDisplay() {
+    for (let prop in Book) {
 
+    }
+};
 
-
-
-FROM NON-MODAL HIDE/SHOW FORM.
-questions.style.display = 'none';
-
-newButton.addEventListener("click", () => {
-    questions.style.display = 'block';
-});
-*/
+const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
+const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
+myLibrary.push(fireworks, bloodMeridian);
