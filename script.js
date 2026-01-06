@@ -1,13 +1,19 @@
-let myLibrary = [];
+let myLibrary = ["title", "author", "pages", "read"];
+
 const newButton = document.querySelector("#newButton");
 const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
 const dialog = document.querySelector("dialog");
+const libraryDisplay = document.querySelector(".libraryDisplay")
+const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
+const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
+
+let displayBook = document.querySelector("#displayBook");
 let title = document.querySelector("#bookTitle");
 let author = document.querySelector("#bookAuthor");
 let pages = document.querySelector("#pageNum");
 let read = document.querySelector("#userRead");
-
+let newBook = document.createElement("div");
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -31,15 +37,29 @@ function addBookToLibrary() {
         let userBook = `${title.value}`.crypto.randomUUID() = new Book(`${title.value}`, 
             `${author.value}`,`${pages.value}`, `${read.value}`);
             myLibrary.push(userBook);
+            console.log(userBook);
     });
 };
 
-function bookDisplay() {
-    for (let prop in Book) {
 
+
+//newBook not a node?
+
+
+
+function bookDisplay(array) {
+    for (i = 0; i < array.length; i++) {
+        let title = `${array[i].title}`;
+        let author = `${array[i].author}`;
+        let pages = `${array[i].pages}`;
+        let read = `${array[i].read}`;
+        
+        libraryDisplay.appendChild("newBook");
+        newBook.textContent = `${title}`, `${author}`, `${pages}`, `${read}`;
     }
 };
 
-const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
-const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
+bookDisplay(myLibrary);
 myLibrary.push(fireworks, bloodMeridian);
+console.log(myLibrary);
+

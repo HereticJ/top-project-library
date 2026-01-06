@@ -8,3 +8,15 @@
   );
   opacity: 0.75;
 }
+
+.libraryDisplay {
+  display: grid;
+  height: 1000px;
+  width: 1000px;
+}
+
+#displayBook {
+  display: grid;
+  height: 150px;
+  width: 100px;
+}
