@@ -1,4 +1,4 @@
-let myLibrary = ["title", "author", "pages", "read"];
+let myLibrary = [];
 
 const newButton = document.querySelector("#newButton");
 const questions = document.querySelector("#questions");
@@ -14,6 +14,16 @@ let author = document.querySelector("#bookAuthor");
 let pages = document.querySelector("#pageNum");
 let read = document.querySelector("#userRead");
 let newBook = document.createElement("div");
+let form = document.querySelector("#questionForm");
+
+myLibrary.push({
+    fireworks,
+});
+
+myLibrary.push({
+    bloodMeridian
+});
+
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -23,43 +33,36 @@ function Book(title, author, pages, read) {
     this.author = author,
     this.pages = pages,
     this.read = read
-    /*
-        this.sayTitle = function() {
-            console.log(`${this.title} added.`);
-        }
-    */
 };
 
 function addBookToLibrary() {
     dialog.showModal();
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
-        let userBook = `${title.value}`.crypto.randomUUID() = new Book(`${title.value}`, 
+        let newBook = new Book(`${title.value}`, 
             `${author.value}`,`${pages.value}`, `${read.value}`);
-            myLibrary.push(userBook);
-            console.log(userBook);
+            myLibrary.push({
+                newBook
+            });
     });
 };
 
-
-
-//newBook not a node?
-
-
-
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
+        libraryDisplay.appendChild("#displayBook")
+            displayBook.textContent = myLibrary[i];
+
+    }
+};
+
+bookDisplay(myLibrary);
+
+/*
         let title = `${array[i].title}`;
         let author = `${array[i].author}`;
         let pages = `${array[i].pages}`;
         let read = `${array[i].read}`;
         
-        libraryDisplay.appendChild("newBook");
-        newBook.textContent = `${title}`, `${author}`, `${pages}`, `${read}`;
-    }
-};
-
-bookDisplay(myLibrary);
-myLibrary.push(fireworks, bloodMeridian);
-console.log(myLibrary);
-
+        libraryDisplay.appendChild("displayBook");
+        displayBook.textContent = `${title}`, `${author}`, `${pages}`, `${read}`;
+        */
