@@ -5,16 +5,17 @@ const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay")
+
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
 const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
 
-let displayBook = document.querySelector("#displayBook");
 let title = document.querySelector("#bookTitle");
 let author = document.querySelector("#bookAuthor");
 let pages = document.querySelector("#pageNum");
 let read = document.querySelector("#userRead");
-let newBook = document.createElement("div");
 let form = document.querySelector("#questionForm");
+
+let newBook = document.createElement("div");
 
 myLibrary.push({
     fireworks,
@@ -23,7 +24,6 @@ myLibrary.push({
 myLibrary.push({
     bloodMeridian
 });
-
 
 function Book(title, author, pages, read) {
     if (!new.target) {
@@ -49,13 +49,13 @@ function addBookToLibrary() {
 
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
-        libraryDisplay.appendChild("#displayBook")
-            displayBook.textContent = myLibrary[i];
-
+        libraryDisplay.appendChild(newBook)
+            newBook.textContent = `${myLibrary[i].title}`, `${myLibrary[i].author}`, 
+            `${myLibrary[i].pages}`, `${myLibrary[i].read}`;
     }
 };
 
-bookDisplay(myLibrary);
+bookDisplay();
 
 /*
         let title = `${array[i].title}`;
