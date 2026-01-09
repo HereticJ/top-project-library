@@ -16,6 +16,7 @@ let read = document.querySelector("#userRead");
 let form = document.querySelector("#questionForm");
 
 let newBook = document.createElement("div");
+let displayedBook = document.createElement("div");
 
 myLibrary.push({
     fireworks,
@@ -29,10 +30,10 @@ function Book(title, author, pages, read) {
     if (!new.target) {
         throw Error("You must use the 'new' operator to call the constructor");
     }
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
+        this.title = title,
+        this.author = author,
+        this.pages = pages,
+        this.read = read
 };
 
 function addBookToLibrary() {
@@ -49,20 +50,25 @@ function addBookToLibrary() {
 
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
-        libraryDisplay.appendChild(newBook)
-            newBook.textContent = `${myLibrary[i].title}`, `${myLibrary[i].author}`, 
-            `${myLibrary[i].pages}`, `${myLibrary[i].read}`;
+
+        let bookTitle = document.createElement("h4")
+        let bookAuthor = document.createElement("h6")
+        let bookPages = document.createElement("p")
+        let bookRead = document.createElement("p")
+
+        bookTitle.textContent = array.title
+        bookAuthor.textContent = array.author
+        bookPages.textContent = array.pages
+        bookRead.textContent = array.read
+
+            displayedBook.appendChild(bookTitle)
+            displayedBook.appendChild(bookAuthor)
+            displayedBook.appendChild(bookPages)
+            displayedBook.appendChild(bookRead)
+
+                libraryDisplay.appendChild(displayedBook)
+            
     }
 };
 
-bookDisplay();
-
-/*
-        let title = `${array[i].title}`;
-        let author = `${array[i].author}`;
-        let pages = `${array[i].pages}`;
-        let read = `${array[i].read}`;
-        
-        libraryDisplay.appendChild("displayBook");
-        displayBook.textContent = `${title}`, `${author}`, `${pages}`, `${read}`;
-        */
+bookDisplay(myLibrary);

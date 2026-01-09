@@ -11,12 +11,15 @@
 
 .libraryDisplay {
   display: grid;
-  height: 1000px;
-  width: 1000px;
+  height: 800px;
+  width: 800px;
 }
 
-#displayBook {
+.libraryDisplay > div {
   display: grid;
-  height: 150px;
-  width: 100px;
+  border: 1px solid black;
+  height: 300px;
+  width: 200px;
+  grid-template-rows: 100px 100px 25px;
 }
+
