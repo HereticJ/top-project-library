@@ -1,73 +1,73 @@
-let myLibrary = [];
+// Array of book objects.
+const myLibrary = [];
 
+// DOM element select declarations.
 const newButton = document.querySelector("#newButton");
 const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay")
-
-const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
-const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
-
 let title = document.querySelector("#bookTitle");
 let author = document.querySelector("#bookAuthor");
 let pages = document.querySelector("#pageNum");
 let read = document.querySelector("#userRead");
 let form = document.querySelector("#questionForm");
 
-let newBook = document.createElement("div");
+// UUID variable declaration
+let uuid = crypto.randonUUID;
+
+// Example books.
+const fireworks = new Book(crypto.randomUUID(), "Fireworks", "Josh Grant", 
+    435, "No");
+const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian", 
+    "Cormac McCarthy", 351, "Yes");
+
+// DOM create element declarations.
 let displayedBook = document.createElement("div");
+let bookTitle = document.createElement("h3");
+let bookAuthor = document.createElement("h3");
+let bookPages = document.createElement("p");
+let bookRead = document.createElement("p");
 
-myLibrary.push({
-    fireworks,
-});
-
-myLibrary.push({
-    bloodMeridian
-});
-
-function Book(title, author, pages, read) {
+// Book object constructor.
+function Book(uuid, title, author, pages, read) {
     if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+        throw Error("You must use the 'new' operator to call the constructor")
     }
+        this.uuid = uuid,
         this.title = title,
         this.author = author,
         this.pages = pages,
         this.read = read
+        myLibrary.push(this)
 };
 
+// Library array function for adding books.
 function addBookToLibrary() {
     dialog.showModal();
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
-        let newBook = new Book(`${title.value}`, 
-            `${author.value}`,`${pages.value}`, `${read.value}`);
+        let newBook = new Book(`${title}`, 
+            `${author}`,`${pages}`, `${read}`);
             myLibrary.push({
                 newBook
             });
     });
 };
 
+// Visual book display.
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
-
-        let bookTitle = document.createElement("h4")
-        let bookAuthor = document.createElement("h6")
-        let bookPages = document.createElement("p")
-        let bookRead = document.createElement("p")
-
-        bookTitle.textContent = array.title
-        bookAuthor.textContent = array.author
-        bookPages.textContent = array.pages
-        bookRead.textContent = array.read
-
-            displayedBook.appendChild(bookTitle)
-            displayedBook.appendChild(bookAuthor)
-            displayedBook.appendChild(bookPages)
-            displayedBook.appendChild(bookRead)
-
-                libraryDisplay.appendChild(displayedBook)
-            
+        libraryDisplay.appendChild(displayedBook)
+            bookTitle.textContent = array[i].title
+            bookAuthor.textContent = array[i].author
+            bookPages.textContent = array[i].pages
+            bookRead.textContent = array[i].read
+                displayedBook.appendChild(bookTitle)
+                displayedBook.appendChild(bookAuthor)
+                displayedBook.appendChild(bookPages)
+                displayedBook.appendChild(bookRead)        
+                   
     }
 };
 
