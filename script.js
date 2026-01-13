@@ -23,7 +23,7 @@ const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian",
     "Cormac McCarthy", 351, "Yes");
 
 // DOM create element declarations.
-let displayedBook = document.createElement("div");
+let addBook = document.createElement("div");
 let bookTitle = document.createElement("h3");
 let bookAuthor = document.createElement("h3");
 let bookPages = document.createElement("p");
@@ -58,15 +58,19 @@ function addBookToLibrary() {
 // Visual book display.
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
-        libraryDisplay.appendChild(displayedBook)
+        if (libraryDisplay.contains("div")) {
+            addBook = "div[i]"
+        };
+        libraryDisplay.appendChild(addBook)
+            bookUuid = array[i].uuid
             bookTitle.textContent = array[i].title
             bookAuthor.textContent = array[i].author
             bookPages.textContent = array[i].pages
             bookRead.textContent = array[i].read
-                displayedBook.appendChild(bookTitle)
-                displayedBook.appendChild(bookAuthor)
-                displayedBook.appendChild(bookPages)
-                displayedBook.appendChild(bookRead)        
+                addBook.appendChild(bookTitle)
+                addBook.appendChild(bookAuthor)
+                addBook.appendChild(bookPages)
+                addBook.appendChild(bookRead)        
                    
     }
 };
