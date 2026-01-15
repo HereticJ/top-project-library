@@ -21,13 +21,8 @@ const fireworks = new Book(crypto.randomUUID(), "Fireworks", "Josh Grant",
     435, "No");
 const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian", 
     "Cormac McCarthy", 351, "Yes");
-
-// DOM create element declarations.
-
-let bookTitle = document.createElement("h3");
-let bookAuthor = document.createElement("h3");
-let bookPages = document.createElement("p");
-let bookRead = document.createElement("p");
+const clockers = new Book(crypto.randomUUID(), "Clockers", "Richard Price", 
+    732, "Yes");
 
 // Book object constructor.
 function Book(uuid, title, author, pages, read) {
@@ -42,6 +37,7 @@ function Book(uuid, title, author, pages, read) {
         myLibrary.push(this)
 };
 
+/*
 // Library array function for adding books.
 function addBookToLibrary() {
     dialog.showModal();
@@ -54,21 +50,32 @@ function addBookToLibrary() {
             });
     });
 };
+*/
 
 // Visual book display.
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
         let addBook = document.createElement("div" + [i])
         libraryDisplay.appendChild(addBook)
-            bookUuid = array[i].uuid
-            bookTitle.textContent = array[i].title
-            bookAuthor.textContent = array[i].author
-            bookPages.textContent = array[i].pages
-            bookRead.textContent = array[i].read
-            addBook[i].appendChild(bookTitle)
-            addBook[i].appendChild(bookAuthor)
-            addBook[i].appendChild(bookPages)
-            addBook[i].appendChild(bookRead)
+        addBook.classList.add("libraryBooks")
+        let libraryBooks = document.querySelector(".libraryBooks")
+            // DOM create element declarations.
+            let bookTitle = document.createElement("h3");
+            bookTitle.classList.add("bookTitle");
+            let bookAuthor = document.createElement("h5");
+            bookAuthor.classList.add("bookAuthor");
+            let bookPages = document.createElement("p");
+            bookPages.classList.add("bookPages");
+            let bookRead = document.createElement("p");
+            bookRead.classList.add("bookRead");
+                bookTitle.textContent = array[i].title
+                bookAuthor.textContent = "By:   " + array[i].author
+                bookPages.textContent = array[i].pages + "Pages"
+                bookRead.textContent = "Read? " + array[i].read
+                    addBook.appendChild(bookTitle)
+                    addBook.appendChild(bookAuthor)
+                    addBook.appendChild(bookPages)
+                    addBook.appendChild(bookRead)
     }
 };
 

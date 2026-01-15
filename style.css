@@ -11,15 +11,53 @@
 
 .libraryDisplay {
   display: grid;
-  height: 800px;
-  width: 800px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 2fr 2fr 2fr;
+  gap: 20px;
 }
 
-.libraryDisplay > div {
+.libraryBooks {
   display: grid;
   border: 1px solid black;
   height: 300px;
   width: 200px;
-  grid-template-rows: 100px 100px 25px;
+  grid-template-rows: 3fr 2fr 1fr;
+  grid-template-columns: 1fr 8fr 1fr;
 }
 
+.bookTitle {
+  font-size: 24px;
+  display: grid;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  align-self: start;
+  justify-self: stretch;
+}
+
+.bookAuthor {
+  font-size: 14px;
+  display: grid;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  justify-self: stretch;
+  align-self: end;
+}
+
+.bookPages {
+  font-size: 12px;
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 3;
+  justify-self: start;
+  align-self: end;
+  padding-left: 10px;
+}
+
+.bookRead {
+  display: grid;
+  grid-column-start: 3;
+  grid-row-start: 3;
+  justify-self: end;
+  align-self: end;
+  padding-right: 20px;
+}
