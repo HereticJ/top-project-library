@@ -37,20 +37,24 @@ function Book(uuid, title, author, pages, read) {
         myLibrary.push(this)
 };
 
-/*
 // Library array function for adding books.
 function addBookToLibrary() {
     dialog.showModal();
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
-        let newBook = new Book(`${title}`, 
-            `${author}`,`${pages}`, `${read}`);
-            myLibrary.push({
-                newBook
-            });
+        const userAnswers = document.form[0];
+        let text = "";
+        for (i = 0; i < form.length; i++) {
+            text += forms.elements[i].value + "<br>";
+        }
+
+        let userBook = new Book(crypto.randomUUID(), userAnswers.title, 
+            userAnswers.author, userAnswers.pages, userAnswers.read);
+            userBook
+            myLibrary.push(userBook);
+            console.log(myLibrary)
     });
 };
-*/
 
 // Visual book display.
 function bookDisplay(array) {
