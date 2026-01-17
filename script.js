@@ -7,11 +7,8 @@ const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay")
-let title = document.querySelector("#bookTitle");
-let author = document.querySelector("#bookAuthor");
-let pages = document.querySelector("#pageNum");
-let read = document.querySelector("#userRead");
-let form = document.querySelector("#questionForm");
+let form = document.forms[0];
+let text = "";
 
 // UUID variable declaration
 let uuid = crypto.randonUUID;
@@ -42,19 +39,39 @@ function addBookToLibrary() {
     dialog.showModal();
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', () => {
-        const userAnswers = document.form[0];
-        let text = "";
-        for (i = 0; i < form.length; i++) {
-            text += forms.elements[i].value + "<br>";
-        }
-
-        let userBook = new Book(crypto.randomUUID(), userAnswers.title, 
-            userAnswers.author, userAnswers.pages, userAnswers.read);
+        for (let i = 0; i < form.length; i++) {
+            text += form.elements[i].value + "<br>";
+            let userBook = new Book(uuid, form.elements[i].value)
+                console.log(userBook)
+        }}
+    )};
+            
+        /*
+        let form = document.getElementById("#questionForm");
+        let title = document.getElementById("#title").elements[1];
+        let author = document.getElementById("#bookAuthor").elements[2];
+        let pages = document.getElementById("#pageNum").elements[3];
+        let read = document.getElementById("#userRead").elements[4];
+        let userBook = new Book(crypto.randomUUID(), title, 
+            author, pages, read);
             userBook
             myLibrary.push(userBook);
-            console.log(myLibrary)
+            // Reset form values to defaults.
+            function resetElements() {
+                title = '';
+                author = '';
+                pages = '';
+                read = '';
+            };
+            function resetForm() {
+                form.resetElements()
+            };
+            form.resetForm();
+
     });
 };
+*/
+
 
 // Visual book display.
 function bookDisplay(array) {
@@ -62,19 +79,18 @@ function bookDisplay(array) {
         let addBook = document.createElement("div" + [i])
         libraryDisplay.appendChild(addBook)
         addBook.classList.add("libraryBooks")
-        let libraryBooks = document.querySelector(".libraryBooks")
             // DOM create element declarations.
             let bookTitle = document.createElement("h3");
-            bookTitle.classList.add("bookTitle");
             let bookAuthor = document.createElement("h5");
-            bookAuthor.classList.add("bookAuthor");
             let bookPages = document.createElement("p");
-            bookPages.classList.add("bookPages");
             let bookRead = document.createElement("p");
+            bookTitle.classList.add("bookTitle");
+            bookAuthor.classList.add("bookAuthor");
+            bookPages.classList.add("bookPages");
             bookRead.classList.add("bookRead");
                 bookTitle.textContent = array[i].title
-                bookAuthor.textContent = "By:   " + array[i].author
-                bookPages.textContent = array[i].pages + "Pages"
+                bookAuthor.textContent = array[i].author
+                bookPages.textContent = array[i].pages + " Pages"
                 bookRead.textContent = "Read? " + array[i].read
                     addBook.appendChild(bookTitle)
                     addBook.appendChild(bookAuthor)
