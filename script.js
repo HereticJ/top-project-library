@@ -6,8 +6,8 @@ const newButton = document.querySelector("#newButton");
 const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
 const dialog = document.querySelector("dialog");
-const libraryDisplay = document.querySelector(".libraryDisplay")
-let form = document.forms[0];
+const libraryDisplay = document.querySelector(".libraryDisplay");
+const form = document.forms[0];
 let text = "";
 
 // UUID variable declaration
@@ -38,40 +38,17 @@ function Book(uuid, title, author, pages, read) {
 function addBookToLibrary() {
     dialog.showModal();
     // take params, create a book then store it in the array.
-    submitButton.addEventListener('click', () => {
-        for (let i = 0; i < form.length; i++) {
-            text += form.elements[i].value + "<br>";
-            let userBook = new Book(uuid, form.elements[i].value)
-                console.log(userBook)
-        }}
-    )};
-            
-        /*
-        let form = document.getElementById("#questionForm");
-        let title = document.getElementById("#title").elements[1];
-        let author = document.getElementById("#bookAuthor").elements[2];
-        let pages = document.getElementById("#pageNum").elements[3];
-        let read = document.getElementById("#userRead").elements[4];
-        let userBook = new Book(crypto.randomUUID(), title, 
-            author, pages, read);
-            userBook
-            myLibrary.push(userBook);
-            // Reset form values to defaults.
-            function resetElements() {
-                title = '';
-                author = '';
-                pages = '';
-                read = '';
-            };
-            function resetForm() {
-                form.resetElements()
-            };
-            form.resetForm();
-
-    });
-};
-*/
-
+    submitButton.addEventListener('click', submitClick);
+        function submitClick(event) {
+            let userTitle = document.querySelector("#bookTitle");
+            let userAuthor = document.querySelector("#bookAuthor");
+            let userPages = document.querySelector("#bookPages");
+            let userRead = document.querySelector("#bookRead");
+                userTitle.textContent += [`input#bookTitle`].value;
+                let userBook = new Book(crypto.randomUUID(), userTitle, 
+                `${userAuthor}`, `${userPages}`, `${userRead}`);
+                    event.preventDefault();
+        }};
 
 // Visual book display.
 function bookDisplay(array) {
