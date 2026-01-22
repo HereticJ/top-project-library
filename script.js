@@ -1,14 +1,20 @@
 // Array of book objects.
-const myLibrary = [];
+let myLibrary = [];
 
 // DOM element select declarations.
+let questions = document.querySelector("#questionForm");
 const newButton = document.querySelector("#newButton");
-const questions = document.querySelector("#questions");
 const submitButton = document.querySelector("#submit");
+const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay");
-const form = document.forms[0];
-let text = "";
+
+
+// Cancel modal.
+cancelButton.addEventListener("click", cancelClick)
+    function cancelClick(event) {
+        dialog.close();
+    };
 
 // UUID variable declaration
 let uuid = crypto.randonUUID;
@@ -21,6 +27,8 @@ const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian",
 const clockers = new Book(crypto.randomUUID(), "Clockers", "Richard Price", 
     732, "Yes");
 
+myLibrary.push(fireworks, bloodMeridian, clockers);
+
 // Book object constructor.
 function Book(uuid, title, author, pages, read) {
     if (!new.target) {
@@ -31,28 +39,30 @@ function Book(uuid, title, author, pages, read) {
         this.author = author,
         this.pages = pages,
         this.read = read
-        myLibrary.push(this)
 };
 
 // Library array function for adding books.
 function addBookToLibrary() {
     dialog.showModal();
+
     // take params, create a book then store it in the array.
     submitButton.addEventListener('click', submitClick);
         function submitClick(event) {
-            let userTitle = document.querySelector("#bookTitle");
-            let userAuthor = document.querySelector("#bookAuthor");
-            let userPages = document.querySelector("#bookPages");
-            let userRead = document.querySelector("#bookRead");
-                userTitle.textContent += [`input#bookTitle`].value;
-                let userBook = new Book(crypto.randomUUID(), userTitle, 
-                `${userAuthor}`, `${userPages}`, `${userRead}`);
-                    event.preventDefault();
-        }};
+            event.preventDefault();
+            let questions = document.querySelector("#questionForm");
+                let userBook = new Book(crypto.randomUUID(), 
+                questions.elements[0].value, questions.elements[1].value, 
+                questions.elements[2].value, questions.elements[3].value);
+        dialog.close();
+        myLibrary = [];
+        myLibrary.push(userBook);
+        bookDisplay(myLibrary);
+    }};
 
 // Visual book display.
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
+        myLibrary = [];
         let addBook = document.createElement("div" + [i])
         libraryDisplay.appendChild(addBook)
         addBook.classList.add("libraryBooks")
