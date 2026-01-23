@@ -9,6 +9,8 @@ const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay");
 
+// DOM elements create declarations.
+
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
@@ -27,8 +29,6 @@ const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian",
 const clockers = new Book(crypto.randomUUID(), "Clockers", "Richard Price", 
     732, "Yes");
 
-myLibrary.push(fireworks, bloodMeridian, clockers);
-
 // Book object constructor.
 function Book(uuid, title, author, pages, read) {
     if (!new.target) {
@@ -38,7 +38,7 @@ function Book(uuid, title, author, pages, read) {
         this.title = title,
         this.author = author,
         this.pages = pages,
-        this.read = read
+        this.read = read;
 };
 
 // Library array function for adding books.
@@ -71,19 +71,34 @@ function bookDisplay(array) {
             let bookAuthor = document.createElement("h5");
             let bookPages = document.createElement("p");
             let bookRead = document.createElement("p");
+            let xSvg = document.createElement("img");
+            const removeButton = document.createElement("button");
+            // Add class names for each created element.
+            removeButton.classList.add("removeButton");
             bookTitle.classList.add("bookTitle");
             bookAuthor.classList.add("bookAuthor");
             bookPages.classList.add("bookPages");
             bookRead.classList.add("bookRead");
-                bookTitle.textContent = array[i].title
-                bookAuthor.textContent = array[i].author
-                bookPages.textContent = array[i].pages + " Pages"
-                bookRead.textContent = "Read? " + array[i].read
-                    addBook.appendChild(bookTitle)
-                    addBook.appendChild(bookAuthor)
-                    addBook.appendChild(bookPages)
-                    addBook.appendChild(bookRead)
+            xSvg.classList.add("xSvg");
+            // Assigns text for book details to each book card.
+            bookTitle.textContent = array[i].title;
+            bookAuthor.textContent = array[i].author;
+            bookPages.textContent = array[i].pages + " Pages";
+            bookRead.textContent = "Read? " + array[i].read;
+            // Adds library books to HTML.
+            addBook.appendChild(bookTitle);
+            addBook.appendChild(bookAuthor);
+            addBook.appendChild(bookPages);
+            addBook.appendChild(bookRead);
+            addBook.appendChild(removeButton);
+            addBook.appendChild(xSvg);
     }
 };
 
+function bookRemove(array) {
+    removeButton.addEventListener('click', removeBook)
+
+}
+
+myLibrary.push(fireworks, bloodMeridian, clockers);
 bookDisplay(myLibrary);
