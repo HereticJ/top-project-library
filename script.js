@@ -11,8 +11,9 @@ const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
 const libraryDisplay = document.querySelector(".libraryDisplay");
 
-// DOM elements create declarations.
-
+// DOM create element declarations.
+let iconShow = document.createElement("img");
+    iconShow.src='book-remove.svg';
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
@@ -71,8 +72,6 @@ function addBookToLibrary() {
 function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
 
-        
-
         let addBook = document.createElement("div" + [i])
         libraryDisplay.appendChild(addBook)
         addBook.classList.add("libraryBooks")
@@ -82,8 +81,7 @@ function bookDisplay(array) {
             let bookAuthor = document.createElement("h5");
             let bookPages = document.createElement("p");
             let bookRead = document.createElement("p");
-            let xSvg = document.createElement("img");
-            const removeButton = document.createElement("button");
+            let removeButton = document.createElement("button");
 
             // Add class names for each created element.
             removeButton.classList.add("removeButton");
@@ -91,27 +89,41 @@ function bookDisplay(array) {
             bookAuthor.classList.add("bookAuthor");
             bookPages.classList.add("bookPages");
             bookRead.classList.add("bookRead");
-            xSvg.classList.add("xSvg");
-
+            
             // Assigns text for book details to each book card.
             bookTitle.textContent = array[i].title;
             bookAuthor.textContent = array[i].author;
             bookPages.textContent = array[i].pages + " Pages";
             bookRead.textContent = "Read? " + array[i].read;
 
-            // Adds library books to HTML.
+            // Adds library books to DOM.
             addBook.appendChild(bookTitle);
             addBook.appendChild(bookAuthor);
             addBook.appendChild(bookPages);
             addBook.appendChild(bookRead);
             addBook.appendChild(removeButton);
-            addBook.appendChild(xSvg);
-    }
-};
 
+            removeButton.addEventListener('mouseenter', showIcon)
+                function showIcon() {
+                    removeButton.appendChild(iconShow) == true;
+                };
+
+            /*removeButton.addEventListener('mouseleave', hideIcon)
+                function hideIcon() {
+                    removeButton.removeChild(iconShow) == false;
+                }*/
+}};
+
+// Click event for removing books from LIbrary Display.
 function bookRemove(array) {
-    removeButton.addEventListener('click', removeBook)
-}
+    removeButton.addEventListener('click', array) 
+        for (i = 0; i < array.length; i++) {
+            if (array[i] == div + i) {
+                array[i].splice(i, 1);
+                bookDisplay(myLibrary);
+            }
+        }
+};
 
 myLibrary.push(fireworks, bloodMeridian, clockers);
 bookDisplay(myLibrary);
