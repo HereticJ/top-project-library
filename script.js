@@ -32,6 +32,8 @@ const bloodMeridian = new Book(crypto.randomUUID(), "Blood Meridian",
 const clockers = new Book(crypto.randomUUID(), "Clockers", "Richard Price", 
     732, "Yes");
 
+myLibrary.push(fireworks, bloodMeridian, clockers);
+
 // Book object constructor.
 function Book(uuid, title, author, pages, read) {
     if (!new.target) {
@@ -81,6 +83,7 @@ function bookDisplay(array) {
             let bookAuthor = document.createElement("h5");
             let bookPages = document.createElement("p");
             let bookRead = document.createElement("p");
+            let bookUuid = document.querySelector("uuid");
             let removeButton = document.createElement("button");
 
             // Add class names for each created element.
@@ -95,6 +98,7 @@ function bookDisplay(array) {
             bookAuthor.textContent = array[i].author;
             bookPages.textContent = array[i].pages + " Pages";
             bookRead.textContent = "Read? " + array[i].read;
+            bookUuid = array[i].uuid;
 
             // Adds library books to DOM.
             addBook.appendChild(bookTitle);
@@ -108,22 +112,20 @@ function bookDisplay(array) {
                     removeButton.appendChild(iconShow) == true;
                 };
 
-            /*removeButton.addEventListener('mouseleave', hideIcon)
+            removeButton.addEventListener('mouseleave', hideIcon)
                 function hideIcon() {
                     removeButton.removeChild(iconShow) == false;
-                }*/
+                };
+            
+            // Click event for removing books from LIbrary Display.
+            removeButton.addEventListener('click', removeBook)
+                function removeBook() {
+                    libraryDisplay.removeChild(addBook)
+                    // Find way to select array entry by uuid and remove from array.
+                    if (myLibrary[i].uuid = bookUuid[i]) {
+                        myLibrary.splice(i, 1)
+                    }
+                };
 }};
 
-// Click event for removing books from LIbrary Display.
-function bookRemove(array) {
-    removeButton.addEventListener('click', array) 
-        for (i = 0; i < array.length; i++) {
-            if (array[i] == div + i) {
-                array[i].splice(i, 1);
-                bookDisplay(myLibrary);
-            }
-        }
-};
-
-myLibrary.push(fireworks, bloodMeridian, clockers);
 bookDisplay(myLibrary);
