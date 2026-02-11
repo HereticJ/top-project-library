@@ -11,10 +11,6 @@ const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
 
-// Creates unique IDs for Book objects.
-//let id = crypto.randomUUID();
-
-
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
     function cancelClick(event) {
@@ -30,25 +26,23 @@ Identifier.prototype.assignId = function() {
 };
 
 // Book object constructor.
-function Book(id, title, author, pages, read) {
+function Book(title, author, pages, read, id) {
     if (!new.target) {
         throw Error("You must use the 'new' operator to call the constructor")
     }
-        this.id = id,
         this.title = title,
         this.author = author,
         this.pages = pages,
-        this.read = read
+        this.read = read,
+        this.id = crypto.randomUUID(id)
 };
 
-Object.setPrototypeOf(Book.prototype, Identifier.prototype);
-
 // Example books.
-const fireworks = new Book(`${crypto.randomUUID()}`, "Fireworks", "Josh Grant", 
+const fireworks = new Book("Fireworks", "Josh Grant", 
     435, "No");
-const bloodMeridian = new Book(`${crypto.randomUUID()}`, "Blood Meridian", 
+const bloodMeridian = new Book("Blood Meridian", 
     "Cormac McCarthy", 351, "Yes");
-const clockers = new Book(`${crypto.randomUUID()}`, "Clockers", "Richard Price", 
+const clockers = new Book("Clockers", "Richard Price", 
     732, "Yes");
 
 myLibrary.push(fireworks, bloodMeridian, clockers);
@@ -69,9 +63,9 @@ submitButton.addEventListener('click', submitClick);
                 questions.elements[3].value = "No"
             };
             // Takes form info and creates a new book object from its data.
-            let userBook = new Book(`${crypto.randomUUID()}`, 
-                questions.elements[0].value, questions.elements[1].value, 
-                questions.elements[2].value, questions.elements[3].value);
+            let userBook = new Book(questions.elements[0].value, questions.elements[1].value, 
+                questions.elements[2].value, questions.elements[3].value, 
+                `${crypto.randomUUID()}`);
         dialog.close();
         myLibrary.push(userBook);
     bookDisplay(myLibrary);
@@ -80,6 +74,7 @@ submitButton.addEventListener('click', submitClick);
 
 // Visual book display.
 function bookDisplay(array) {
+
     // Reset libraryDisplay before every loop to prevent repeated cards.
     libraryDisplay.textContent = ``;
 
@@ -94,60 +89,64 @@ function bookDisplay(array) {
         let iconShow = document.createElement("img");
         iconShow.src='book-remove.svg';
 
-            // DOM create element declarations.
-            let bookId = document.createElement("div");
-            let bookTitle = document.createElement("h3");
-            let bookAuthor = document.createElement("h5");
-            let bookPages = document.createElement("p");
-            let bookRead = document.createElement("p");
+        // DOM create element declarations. Makes one card per book.
+        let bookTitle = document.createElement("h3");
+        let bookAuthor = document.createElement("h5");
+        let bookPages = document.createElement("p");
+        let bookRead = document.createElement("p");
+        let bookId = document.createElement("p");
 
-            // Add class names for each created element.
-            bookId.classList.add("bookId");
-            bookTitle.classList.add("bookTitle");
-            bookAuthor.classList.add("bookAuthor");
-            bookPages.classList.add("bookPages");
-            bookRead.classList.add("bookRead");
-            removeButton.classList.add("removeButton");
-            
-            // Assigns text for book details to each book card.
-            bookId.textContent = array[i].id;
-            bookTitle.textContent = array[i].title;
-            bookAuthor.textContent = array[i].author;
-            bookPages.textContent = array[i].pages + " Pages";
-            bookRead.textContent = "Read? " + array[i].read;
+        // Add class names for each created element.
+        bookTitle.classList.add("bookTitle");
+        bookAuthor.classList.add("bookAuthor");
+        bookPages.classList.add("bookPages");
+        bookRead.classList.add("bookRead");
+        removeButton.classList.add("removeButton");
+        bookId.classList.add("bookId");
+        
+        // Assigns text for book details to each book card.
+        bookTitle.textContent = array[i].title;
+        bookAuthor.textContent = array[i].author;
+        bookPages.textContent = array[i].pages + " Pages";
+        bookRead.textContent = "Read? " + array[i].read;
+        bookId.textContent = array[i].id;
 
-            // Assigns text content to book cards.
-            addBook.appendChild(bookId);
-            addBook.appendChild(bookTitle);
-            addBook.appendChild(bookAuthor);
-            addBook.appendChild(bookPages);
-            addBook.appendChild(bookRead);
-            addBook.appendChild(removeButton);
+        // Assigns text content to book cards.
+        addBook.appendChild(bookTitle);
+        addBook.appendChild(bookAuthor);
+        addBook.appendChild(bookPages);
+        addBook.appendChild(bookRead);
+        addBook.appendChild(removeButton);
+        addBook.appendChild(bookId);
 
-            // Add book to library display.
-            libraryDisplay.appendChild(addBook);
+        // Add book to library display.
+        libraryDisplay.appendChild(addBook);
 
-            // Show remove icon when mouse hovers over remove button.
-            removeButton.addEventListener('mouseenter', showIcon)
-                function showIcon() {
-                    removeButton.appendChild(iconShow) == true;
-                };
+        // Show remove icon when mouse hovers over remove button.
+        removeButton.addEventListener('mouseenter', showIcon)
+            function showIcon() {
+                removeButton.appendChild(iconShow) == true;
+            };
 
-            // Hide remove icon when mouse hovers outside button area.
-            removeButton.addEventListener('mouseleave', hideIcon)
-                function hideIcon() {
-                    removeButton.removeChild(iconShow) == false;
-                };
+        // Hide remove icon when mouse hovers outside button area.
+        removeButton.addEventListener('mouseleave', hideIcon)
+            function hideIcon() {
+                removeButton.removeChild(iconShow) == false;
+            };
 
-            // Remove books from Array and Card display.
-                // Click event for removing books from LIbrary Display.
-                removeButton.addEventListener('click', removeBook)
-                    function removeBook() {
-                        libraryDisplay.removeChild(addBook);
-                        let updatedArray = array.splice(i, 1);
-                        array = updatedArray
+            // Click event for removing books from LIbrary Display.
+            removeButton.addEventListener('click', removeBook, array)
+                for (i = 0; i < array.length; i++) {
+                    function removeBook(array) {
+                        let removedId = bookId
+                        if (array[i].id == removedId) {
+                            let removeFromArray = array.splice(i, 1)
+                            array = removeFromArray
+                        libraryDisplay.removeChild(addBook)
                         }
-                    
+                        removeBook(myLibrary)
+                    }
+                }
     }
 };
 
