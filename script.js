@@ -1,5 +1,5 @@
 // Array of book objects.
-let myLibrary = [];
+const myLibrary = [];
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
@@ -17,13 +17,15 @@ cancelButton.addEventListener("click", cancelClick)
         dialog.close();
     };
 
-function Identifier(id) {
-    this.id = id;
-};
+// Initialize ID counter.
+let taskIdCounter = 0;
 
-Identifier.prototype.assignId = function() {
-    this.id = `${crypto.randomUUID()}`;
-};
+// Generates IDs for each book.
+function generateUUID() {
+    const uuid = crypto.randomUUID();
+    taskIdCounter++;
+    return `${uuid}`;
+}
 
 // Book object constructor.
 function Book(title, author, pages, read, id) {
@@ -34,7 +36,7 @@ function Book(title, author, pages, read, id) {
         this.author = author,
         this.pages = pages,
         this.read = read,
-        this.id = crypto.randomUUID(id)
+        this.id = generateUUID(id)
 };
 
 // Example books.
@@ -44,6 +46,7 @@ const bloodMeridian = new Book("Blood Meridian",
     "Cormac McCarthy", 351, "Yes");
 const clockers = new Book("Clockers", "Richard Price", 
     732, "Yes");
+const it = new Book("It", "Stephen King", "666", "No")
 
 myLibrary.push(fireworks, bloodMeridian, clockers);
 
@@ -65,7 +68,7 @@ submitButton.addEventListener('click', submitClick);
             // Takes form info and creates a new book object from its data.
             let userBook = new Book(questions.elements[0].value, questions.elements[1].value, 
                 questions.elements[2].value, questions.elements[3].value, 
-                `${crypto.randomUUID()}`);
+                `${generateUUID()}`);
         dialog.close();
         myLibrary.push(userBook);
     bookDisplay(myLibrary);
@@ -79,75 +82,67 @@ function bookDisplay(array) {
     libraryDisplay.textContent = ``;
 
     for (i = 0; i < array.length; i++) {
-        let addBook = document.createElement("div")
+        const addBook = document.createElement("div")
         addBook.classList.add("libraryBooks")
-
-        // Create remove button.
-        let removeButton = document.createElement("button");
 
         // Create remove button image.
         let iconShow = document.createElement("img");
         iconShow.src='book-remove.svg';
 
-        // DOM create element declarations. Makes one card per book.
+        // Makes one card's contents per book.
         let bookTitle = document.createElement("h3");
         let bookAuthor = document.createElement("h5");
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
-        let bookId = document.createElement("p");
+        let bookId = document.createElement("div");
+        let removeButton = document.createElement("button");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
         bookAuthor.classList.add("bookAuthor");
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
-        removeButton.classList.add("removeButton");
         bookId.classList.add("bookId");
-        
-        // Assigns text for book details to each book card.
-        bookTitle.textContent = array[i].title;
-        bookAuthor.textContent = array[i].author;
-        bookPages.textContent = array[i].pages + " Pages";
-        bookRead.textContent = "Read? " + array[i].read;
-        bookId.textContent = array[i].id;
+        removeButton.classList.add("removeButton");
 
-        // Assigns text content to book cards.
-        addBook.appendChild(bookTitle);
-        addBook.appendChild(bookAuthor);
-        addBook.appendChild(bookPages);
-        addBook.appendChild(bookRead);
-        addBook.appendChild(removeButton);
-        addBook.appendChild(bookId);
+        // Assigns book contents to cards.
+        addBook.appendChild(bookTitle)
+        addBook.appendChild(bookAuthor)
+        addBook.appendChild(bookPages)
+        addBook.appendChild(bookRead)
+        addBook.appendChild(removeButton)
+        addBook.appendChild(bookId)
+
+        // Assigns text for book details to each book card.
+        bookTitle.textContent = array[i].title
+        bookAuthor.textContent = array[i].author
+        bookPages.textContent = array[i].pages + " Pages"
+        bookRead.textContent = "Read? " + array[i].read
+        bookId.textContent = array[i].id
 
         // Add book to library display.
-        libraryDisplay.appendChild(addBook);
+        libraryDisplay.appendChild(addBook)
 
         // Show remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
             function showIcon() {
-                removeButton.appendChild(iconShow) == true;
-            };
+                removeButton.appendChild(iconShow) == true
+            }
 
         // Hide remove icon when mouse hovers outside button area.
         removeButton.addEventListener('mouseleave', hideIcon)
             function hideIcon() {
-                removeButton.removeChild(iconShow) == false;
-            };
+                removeButton.removeChild(iconShow) == false
+            }
 
-            // Click event for removing books from LIbrary Display.
-            removeButton.addEventListener('click', removeBook, array)
-                for (i = 0; i < array.length; i++) {
-                    function removeBook(array) {
-                        let removedId = bookId
-                        if (array[i].id == removedId) {
-                            let removeFromArray = array.splice(i, 1)
-                            array = removeFromArray
-                        libraryDisplay.removeChild(addBook)
-                        }
-                        removeBook(myLibrary)
-                    }
+        // Click event for removing books from LIbrary Display.
+        removeButton.addEventListener('click', removeBook)
+            function removeBook(array) {
+                if (Array.includes(id)) {}
+                    array.splice(i, 1);
+                    libraryDisplay.removeChild(addBook);
                 }
-    }
+            }
 };
 
 bookDisplay(myLibrary);
