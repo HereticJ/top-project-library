@@ -1,5 +1,5 @@
 // Array of book objects.
-const myLibrary = [];
+let myLibrary = new Array;
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
@@ -46,9 +46,9 @@ const bloodMeridian = new Book("Blood Meridian",
     "Cormac McCarthy", 351, "Yes");
 const clockers = new Book("Clockers", "Richard Price", 
     732, "Yes");
-const it = new Book("It", "Stephen King", "666", "No")
+const it = new Book("It", "Stephen King", 666, "No")
 
-myLibrary.push(fireworks, bloodMeridian, clockers);
+myLibrary.push(fireworks, bloodMeridian, clockers, it);
 
 // Library array function for adding books.
 function addBookToLibrary() {
@@ -75,7 +75,7 @@ submitButton.addEventListener('click', submitClick);
     }
 };
 
-// Visual book display.
+// Visual book display.f
 function bookDisplay(array) {
 
     // Reset libraryDisplay before every loop to prevent repeated cards.
@@ -134,15 +134,14 @@ function bookDisplay(array) {
             function hideIcon() {
                 removeButton.removeChild(iconShow) == false
             }
-
         // Click event for removing books from LIbrary Display.
         removeButton.addEventListener('click', removeBook)
             function removeBook(array) {
-                if (Array.includes(id)) {}
-                    array.splice(i, 1);
-                    libraryDisplay.removeChild(addBook);
-                }
+                myLibrary.filter((bookId) => bookId == myLibrary[i].id)
+                removeBook(array)
             }
+            
+    }
 };
 
 bookDisplay(myLibrary);
