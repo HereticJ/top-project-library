@@ -1,5 +1,6 @@
 // Array of book objects.
 let myLibrary = new Array;
+console.log(Array.isArray(myLibrary));
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
@@ -40,13 +41,10 @@ function Book(title, author, pages, read, id) {
 };
 
 // Example books.
-const fireworks = new Book("Fireworks", "Josh Grant", 
-    435, "No");
-const bloodMeridian = new Book("Blood Meridian", 
-    "Cormac McCarthy", 351, "Yes");
-const clockers = new Book("Clockers", "Richard Price", 
-    732, "Yes");
-const it = new Book("It", "Stephen King", 666, "No")
+const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
+const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
+const clockers = new Book("Clockers", "Richard Price", 732, "Yes");
+const it = new Book("It", "Stephen King", 6666, "No")
 
 myLibrary.push(fireworks, bloodMeridian, clockers, it);
 
@@ -123,26 +121,39 @@ function bookDisplay(array) {
         // Add book to library display.
         libraryDisplay.appendChild(addBook)
 
-        // Show remove icon when mouse hovers over remove button.
+        // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
             function showIcon() {
                 removeButton.appendChild(iconShow) == true
             }
 
-        // Hide remove icon when mouse hovers outside button area.
+        // Hides remove icon when mouse hovers outside button area.
         removeButton.addEventListener('mouseleave', hideIcon)
             function hideIcon() {
                 removeButton.removeChild(iconShow) == false
             }
-        // Click event for removing books from LIbrary Display.
+
+        // Returns bookId when remove button is clicked.
+            removeButton.addEventListener('click', isClicked)
+                function isClicked(array) {
+                    console.log(Array.isArray(myLibrary))
+                    console.log(bookId)
+                for (i = 0; i < array.length; i++) {
+                    console.log(myLibrary.find(i => i.id == bookId))
+                };
+            };
+
+        // Removes books from LIbrary Display.
         removeButton.addEventListener('click', removeBook)
             function removeBook(array) {
-                myLibrary.filter((bookId) => bookId == myLibrary[i].id)
-                removeBook(array)
+                //myLibrary.filter((bookId) => bookId == myLibrary[i].id)
+                //removeBook(array)
             }
             
     }
 };
 
+
 bookDisplay(myLibrary);
+console.log(Array.isArray(myLibrary));
 console.log(myLibrary);
