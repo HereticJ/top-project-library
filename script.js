@@ -1,6 +1,9 @@
 // Array of book objects.
 let myLibrary = new Array;
 console.log(Array.isArray(myLibrary));
+console.log(Object.getPrototypeOf(Array.prototype));
+
+
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
@@ -74,12 +77,12 @@ submitButton.addEventListener('click', submitClick);
 };
 
 // Visual book display.f
-function bookDisplay(array) {
+function bookDisplay(myLibrary) {
 
     // Reset libraryDisplay before every loop to prevent repeated cards.
     libraryDisplay.textContent = ``;
 
-    for (i = 0; i < array.length; i++) {
+    for (i = 0; i < myLibrary.length; i++) {
         const addBook = document.createElement("div")
         addBook.classList.add("libraryBooks")
 
@@ -112,11 +115,11 @@ function bookDisplay(array) {
         addBook.appendChild(bookId)
 
         // Assigns text for book details to each book card.
-        bookTitle.textContent = array[i].title
-        bookAuthor.textContent = array[i].author
-        bookPages.textContent = array[i].pages + " Pages"
-        bookRead.textContent = "Read? " + array[i].read
-        bookId.textContent = array[i].id
+        bookTitle.textContent = myLibrary[i].title
+        bookAuthor.textContent = myLibrary[i].author
+        bookPages.textContent = myLibrary[i].pages + " Pages"
+        bookRead.textContent = "Read? " + myLibrary[i].read
+        bookId.textContent = myLibrary[i].id
 
         // Add book to library display.
         libraryDisplay.appendChild(addBook)
@@ -134,25 +137,25 @@ function bookDisplay(array) {
             }
 
         // Returns bookId when remove button is clicked.
-            removeButton.addEventListener('click', isClicked)
-                function isClicked(array) {
+        removeButton.addEventListener('click', isClicked) 
+                function isClicked(myLibrary) {
+                    //let findIndex = removeButton.parentNode.bookId;
+
+
+
+                    console.log(findIndex);
                     console.log(Array.isArray(myLibrary))
                     console.log(bookId)
-                for (i = 0; i < array.length; i++) {
-                    console.log(myLibrary.find(i => i.id == bookId))
-                };
-            };
-
-        // Removes books from LIbrary Display.
-        removeButton.addEventListener('click', removeBook)
-            function removeBook(array) {
-                //myLibrary.filter((bookId) => bookId == myLibrary[i].id)
-                //removeBook(array)
-            }
-            
+                    
+                    
+                    if (findIndex == myLibrary.id) {
+                         
+                        myLibrary = myLibrary.splice(i, 1);
+                        libraryDisplay.removeChild(addBook)
+                    }
+                }
     }
 };
-
 
 bookDisplay(myLibrary);
 console.log(Array.isArray(myLibrary));
