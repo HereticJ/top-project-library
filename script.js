@@ -1,15 +1,17 @@
 // Array of book objects.
 let myLibrary = new Array;
 console.log(Array.isArray(myLibrary));
-console.log(Object.getPrototypeOf(Array.prototype));
-
-
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
 let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
 let libraryDisplay = document.querySelector(".libraryDisplay");
+
+
+let removeButton = document.createElement("button");
+removeButton.classList.add("removeButton");
+
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
@@ -26,10 +28,9 @@ let taskIdCounter = 0;
 
 // Generates IDs for each book.
 function generateUUID() {
-    const uuid = crypto.randomUUID();
-    taskIdCounter++;
-    return `${uuid}`;
-}
+    id = crypto.randomUUID()
+    return id;
+};
 
 // Book object constructor.
 function Book(title, author, pages, read, id) {
@@ -43,6 +44,12 @@ function Book(title, author, pages, read, id) {
         this.id = generateUUID(id)
 };
 
+// Writes Book object IDs to console.
+Book.prototype.showId = function() {
+    console.log(`${this.id}`)
+    return `${this.id}`
+};
+
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
 const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
@@ -50,6 +57,8 @@ const clockers = new Book("Clockers", "Richard Price", 732, "Yes");
 const it = new Book("It", "Stephen King", 6666, "No")
 
 myLibrary.push(fireworks, bloodMeridian, clockers, it);
+
+fireworks.showId();
 
 // Library array function for adding books.
 function addBookToLibrary() {
@@ -79,7 +88,7 @@ submitButton.addEventListener('click', submitClick);
 // Visual book display.f
 function bookDisplay(myLibrary) {
 
-    // Reset libraryDisplay before every loop to prevent repeated cards.
+    // Resets libraryDisplay before every loop to prevent repeated cards.
     libraryDisplay.textContent = ``;
 
     for (i = 0; i < myLibrary.length; i++) {
@@ -96,7 +105,6 @@ function bookDisplay(myLibrary) {
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
         let bookId = document.createElement("div");
-        let removeButton = document.createElement("button");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
@@ -104,7 +112,6 @@ function bookDisplay(myLibrary) {
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
         bookId.classList.add("bookId");
-        removeButton.classList.add("removeButton");
 
         // Assigns book contents to cards.
         addBook.appendChild(bookTitle)
@@ -120,6 +127,7 @@ function bookDisplay(myLibrary) {
         bookPages.textContent = myLibrary[i].pages + " Pages"
         bookRead.textContent = "Read? " + myLibrary[i].read
         bookId.textContent = myLibrary[i].id
+        console.log(myLibrary[i].id)
 
         // Add book to library display.
         libraryDisplay.appendChild(addBook)
@@ -137,23 +145,11 @@ function bookDisplay(myLibrary) {
             }
 
         // Returns bookId when remove button is clicked.
-        removeButton.addEventListener('click', isClicked) 
-                function isClicked(myLibrary) {
-                    //let findIndex = removeButton.parentNode.bookId;
-
-
-
-                    console.log(findIndex);
-                    console.log(Array.isArray(myLibrary))
-                    console.log(bookId)
-                    
-                    
-                    if (findIndex == myLibrary.id) {
-                         
-                        myLibrary = myLibrary.splice(i, 1);
-                        libraryDisplay.removeChild(addBook)
-                    }
-                }
+        removeButton.addEventListener('click', removeCard) 
+            function removeCard() {
+                libraryDisplay.removeChild(addBook)
+                array.splice(i, 1)
+            }
     }
 };
 
