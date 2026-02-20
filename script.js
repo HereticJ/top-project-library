@@ -7,11 +7,7 @@ let questions = document.querySelector("#questionForm");
 let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
 let libraryDisplay = document.querySelector(".libraryDisplay");
-
-
-let removeButton = document.createElement("button");
-removeButton.classList.add("removeButton");
-
+let card = document.querySelector("#book-card")
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
@@ -22,9 +18,6 @@ cancelButton.addEventListener("click", cancelClick)
     function cancelClick(event) {
         dialog.close();
     };
-
-// Initialize ID counter.
-let taskIdCounter = 0;
 
 // Generates IDs for each book.
 function generateUUID() {
@@ -86,51 +79,57 @@ submitButton.addEventListener('click', submitClick);
 };
 
 // Visual book display.f
-function bookDisplay(myLibrary) {
+function bookDisplay(array) {
 
     // Resets libraryDisplay before every loop to prevent repeated cards.
     libraryDisplay.textContent = ``;
 
+    // Loops through myLibrary array to assign data to cards.
     for (i = 0; i < myLibrary.length; i++) {
-        const addBook = document.createElement("div")
-        addBook.classList.add("libraryBooks")
+        const addBookCard = document.createElement("card" + i)
+        addBookCard.classList.add("libraryBooks")
 
         // Create remove button image.
         let iconShow = document.createElement("img");
         iconShow.src='book-remove.svg';
-
+        
         // Makes one card's contents per book.
         let bookTitle = document.createElement("h3");
         let bookAuthor = document.createElement("h5");
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
-        let bookId = document.createElement("div");
+        let bookId = document.createElement("card.data-set.uuid");
+        let removeButton = document.createElement("button");
+
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
         bookAuthor.classList.add("bookAuthor");
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
-        bookId.classList.add("bookId");
+        bookId.classList.add("bookId")
+        removeButton.classList.add("removeButton");
 
+      
         // Assigns book contents to cards.
-        addBook.appendChild(bookTitle)
-        addBook.appendChild(bookAuthor)
-        addBook.appendChild(bookPages)
-        addBook.appendChild(bookRead)
-        addBook.appendChild(removeButton)
-        addBook.appendChild(bookId)
+        addBookCard.appendChild(bookTitle)
+        addBookCard.appendChild(bookAuthor)
+        addBookCard.appendChild(bookPages)
+        addBookCard.appendChild(bookRead)
+        addBookCard.appendChild(bookId)
+        addBookCard.appendChild(removeButton)
 
-        // Assigns text for book details to each book card.
-        bookTitle.textContent = myLibrary[i].title
-        bookAuthor.textContent = myLibrary[i].author
-        bookPages.textContent = myLibrary[i].pages + " Pages"
-        bookRead.textContent = "Read? " + myLibrary[i].read
-        bookId.textContent = myLibrary[i].id
+
+        // Assigns text for book details to each book card.        
+        bookTitle.textContent = array[i].title
+        bookAuthor.textContent = array[i].author
+        bookPages.textContent = array[i].pages + " Pages"
+        bookRead.textContent = "Read? " + array[i].read
+        bookId.textContent = array[i].id
         console.log(myLibrary[i].id)
 
         // Add book to library display.
-        libraryDisplay.appendChild(addBook)
+        libraryDisplay.appendChild(addBookCard)
 
         // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
@@ -148,10 +147,9 @@ function bookDisplay(myLibrary) {
         removeButton.addEventListener('click', removeCard) 
             function removeCard() {
                 libraryDisplay.removeChild(addBook)
-                array.splice(i, 1)
             }
     }
-};
+};    
 
 bookDisplay(myLibrary);
 console.log(Array.isArray(myLibrary));
