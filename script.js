@@ -1,5 +1,5 @@
 // Array of book objects.
-let myLibrary = new Array;
+const myLibrary = [];
 console.log(Array.isArray(myLibrary));
 
 // DOM element select declarations.
@@ -7,11 +7,13 @@ let questions = document.querySelector("#questionForm");
 let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
 let libraryDisplay = document.querySelector(".libraryDisplay");
-let card = document.querySelector("#book-card")
+let cards = document.querySelectorAll("#book-card")
+let dataUuid = document.querySelector("card.dataset.uuid")
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
+
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
@@ -69,8 +71,9 @@ submitButton.addEventListener('click', submitClick);
                 questions.elements[3].value = "No"
             };
             // Takes form info and creates a new book object from its data.
-            let userBook = new Book(questions.elements[0].value, questions.elements[1].value, 
-                questions.elements[2].value, questions.elements[3].value, 
+            let userBook = new Book(questions.elements[0].value, 
+                questions.elements[1].value, questions.elements[2].value, 
+                questions.elements[3].value, 
                 `${generateUUID()}`);
         dialog.close();
         myLibrary.push(userBook);
@@ -85,7 +88,7 @@ function bookDisplay(array) {
     libraryDisplay.textContent = ``;
 
     // Loops through myLibrary array to assign data to cards.
-    for (i = 0; i < myLibrary.length; i++) {
+    for (i = 0; i < array.length; i++) {
         const addBookCard = document.createElement("card" + i)
         addBookCard.classList.add("libraryBooks")
 
@@ -101,7 +104,6 @@ function bookDisplay(array) {
         let bookId = document.createElement("card.data-set.uuid");
         let removeButton = document.createElement("button");
 
-
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
         bookAuthor.classList.add("bookAuthor");
@@ -109,7 +111,6 @@ function bookDisplay(array) {
         bookRead.classList.add("bookRead");
         bookId.classList.add("bookId")
         removeButton.classList.add("removeButton");
-
       
         // Assigns book contents to cards.
         addBookCard.appendChild(bookTitle)
@@ -119,16 +120,15 @@ function bookDisplay(array) {
         addBookCard.appendChild(bookId)
         addBookCard.appendChild(removeButton)
 
-
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
         bookAuthor.textContent = array[i].author
         bookPages.textContent = array[i].pages + " Pages"
         bookRead.textContent = "Read? " + array[i].read
         bookId.textContent = array[i].id
-        console.log(myLibrary[i].id)
+        console.log(array[i].id)
 
-        // Add book to library display.
+        // Add book card to library display.
         libraryDisplay.appendChild(addBookCard)
 
         // Shows remove icon when mouse hovers over remove button.
@@ -143,14 +143,23 @@ function bookDisplay(array) {
                 removeButton.removeChild(iconShow) == false
             }
 
-        // Returns bookId when remove button is clicked.
+        // Removes card from library display.
         removeButton.addEventListener('click', removeCard) 
             function removeCard() {
-                libraryDisplay.removeChild(addBook)
+                libraryDisplay.removeChild(addBookCard)
+                return bookId
+            };
+
+        removeButton.addEventListener(`click`, removeBookFromLibrary)
+            function removeBookFromLibrary(myLibrary) {
+
+
             }
     }
-};    
+    
+};
 
 bookDisplay(myLibrary);
+console.log(cards)
 console.log(Array.isArray(myLibrary));
 console.log(myLibrary);
