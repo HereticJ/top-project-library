@@ -8,7 +8,6 @@ let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
 let libraryDisplay = document.querySelector(".libraryDisplay");
 let cards = document.querySelectorAll("#book-card")
-let dataUuid = document.querySelector("card.dataset.uuid")
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
@@ -44,6 +43,9 @@ Book.prototype.showId = function() {
     console.log(`${this.id}`)
     return `${this.id}`
 };
+
+// FIND SOME WAY TO ASSIGN ID TO DATASET.
+let dataAssignId = cards.appendChild(myLibrary.id);
 
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
@@ -126,15 +128,16 @@ function bookDisplay(array) {
         bookPages.textContent = array[i].pages + " Pages"
         bookRead.textContent = "Read? " + array[i].read
         bookId.textContent = array[i].id
-        console.log(array[i].id)
+        
 
         // Add book card to library display.
         libraryDisplay.appendChild(addBookCard)
-
+        
         // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
             function showIcon() {
                 removeButton.appendChild(iconShow) == true
+                
             }
 
         // Hides remove icon when mouse hovers outside button area.
@@ -146,6 +149,10 @@ function bookDisplay(array) {
         // Removes card from library display.
         removeButton.addEventListener('click', removeCard) 
             function removeCard() {
+                console.log(bookId)
+                let arrayId = document.querySelectorAll(cards.dataset.id)
+                console.log(arrayId)
+                
                 libraryDisplay.removeChild(addBookCard)
                 return bookId
             };
