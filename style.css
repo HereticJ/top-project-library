@@ -9,7 +9,7 @@
   opacity: 0.75;
 }
 
-.libraryDisplay {
+#libraryDisplay {
   display: grid;
   grid-template-columns: 200px 200px 200px 200px;
   grid-template-rows: 2fr 2fr 2fr;

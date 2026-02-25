@@ -6,13 +6,11 @@ console.log(Array.isArray(myLibrary));
 let questions = document.querySelector("#questionForm");
 let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
-let libraryDisplay = document.querySelector(".libraryDisplay");
-let cards = document.querySelectorAll("#book-card")
+let libraryDisplay = document.querySelector("#libraryDisplay");
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
-
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
@@ -43,9 +41,6 @@ Book.prototype.showId = function() {
     console.log(`${this.id}`)
     return `${this.id}`
 };
-
-// FIND SOME WAY TO ASSIGN ID TO DATASET.
-let dataAssignId = cards.appendChild(myLibrary.id);
 
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
@@ -86,58 +81,63 @@ submitButton.addEventListener('click', submitClick);
 // Visual book display.f
 function bookDisplay(array) {
 
-    // Resets libraryDisplay before every loop to prevent repeated cards.
-    libraryDisplay.textContent = ``;
-
     // Loops through myLibrary array to assign data to cards.
     for (i = 0; i < array.length; i++) {
-        const addBookCard = document.createElement("card" + i)
-        addBookCard.classList.add("libraryBooks")
+
+        card = document.createElement("card")
+
+        // Resets libraryDisplay before every loop to prevent repeated cards.
+        card.textContent = ``;
 
         // Create remove button image.
         let iconShow = document.createElement("img");
         iconShow.src='book-remove.svg';
-        
+
         // Makes one card's contents per book.
         let bookTitle = document.createElement("h3");
         let bookAuthor = document.createElement("h5");
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
-        let bookId = document.createElement("card.data-set.uuid");
         let removeButton = document.createElement("button");
+        let id = document.createElement("data-id")
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
         bookAuthor.classList.add("bookAuthor");
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
-        bookId.classList.add("bookId")
+        id.classList.add("bookId")
+        card.classList.add("libraryBooks")
         removeButton.classList.add("removeButton");
       
         // Assigns book contents to cards.
-        addBookCard.appendChild(bookTitle)
-        addBookCard.appendChild(bookAuthor)
-        addBookCard.appendChild(bookPages)
-        addBookCard.appendChild(bookRead)
-        addBookCard.appendChild(bookId)
-        addBookCard.appendChild(removeButton)
-
+        card.appendChild(bookTitle)
+        card.appendChild(bookAuthor)
+        card.appendChild(bookPages)
+        card.appendChild(bookRead)
+        card.appendChild(id)
+        card.appendChild(removeButton)
+        
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
         bookAuthor.textContent = array[i].author
         bookPages.textContent = array[i].pages + " Pages"
         bookRead.textContent = "Read? " + array[i].read
-        bookId.textContent = array[i].id
+        id.textContent = array[i].id
         
-
         // Add book card to library display.
-        libraryDisplay.appendChild(addBookCard)
+        libraryDisplay.appendChild(card)
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let bookId = document.querySelector('.card')
+            console.log(card.getAttribute(bookId))
+        })
+
         
         // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
             function showIcon() {
-                removeButton.appendChild(iconShow) == true
-                
+                removeButton.appendChild(iconShow) == true 
             }
 
         // Hides remove icon when mouse hovers outside button area.
@@ -150,16 +150,14 @@ function bookDisplay(array) {
         removeButton.addEventListener('click', removeCard) 
             function removeCard() {
                 console.log(bookId)
-                let arrayId = document.querySelectorAll(cards.dataset.id)
+                let arrayId = document.querySelectorAll(card.dataset.id)
                 console.log(arrayId)
-                
-                libraryDisplay.removeChild(addBookCard)
+                libraryDisplay.removeChild(card)
                 return bookId
             };
 
         removeButton.addEventListener(`click`, removeBookFromLibrary)
             function removeBookFromLibrary(myLibrary) {
-
 
             }
     }
@@ -167,6 +165,5 @@ function bookDisplay(array) {
 };
 
 bookDisplay(myLibrary);
-console.log(cards)
 console.log(Array.isArray(myLibrary));
 console.log(myLibrary);
