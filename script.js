@@ -85,6 +85,7 @@ function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
 
         card = document.createElement("card")
+        cards = document.querySelectorAll("[data-id]")
 
         // Resets libraryDisplay before every loop to prevent repeated cards.
         card.textContent = ``;
@@ -99,7 +100,8 @@ function bookDisplay(array) {
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
         let removeButton = document.createElement("button");
-        let id = document.createElement("data-id")
+        let id = document.createElement("div")
+        let bookId = document.createElement("data-id");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
@@ -115,25 +117,26 @@ function bookDisplay(array) {
         card.appendChild(bookAuthor)
         card.appendChild(bookPages)
         card.appendChild(bookRead)
-        card.appendChild(id)
         card.appendChild(removeButton)
+        card.appendChild(id)
+        id.appendChild(bookId)
+        
         
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
         bookAuthor.textContent = array[i].author
         bookPages.textContent = array[i].pages + " Pages"
         bookRead.textContent = "Read? " + array[i].read
-        id.textContent = array[i].id
+        bookId.textContent = `${array[i].id}`
         
         // Add book card to library display.
         libraryDisplay.appendChild(card)
 
         document.addEventListener('DOMContentLoaded', () => {
-            let bookId = document.querySelector('.card')
-            console.log(card.getAttribute(bookId))
-        })
+        let bookCard = bookid.dataset.id;
+        console.log(bookCard)
+        });
 
-        
         // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showIcon)
             function showIcon() {
@@ -147,23 +150,19 @@ function bookDisplay(array) {
             }
 
         // Removes card from library display.
-        removeButton.addEventListener('click', removeCard) 
+        removeButton.addEventListener('click', removeCard)
             function removeCard() {
-                console.log(bookId)
-                let arrayId = document.querySelectorAll(card.dataset.id)
-                console.log(arrayId)
-                libraryDisplay.removeChild(card)
-                return bookId
-            };
+                
+
+                }
 
         removeButton.addEventListener(`click`, removeBookFromLibrary)
-            function removeBookFromLibrary(myLibrary) {
+            function removeBookFromLibrary() {
 
             }
     }
-    
 };
-
+    
 bookDisplay(myLibrary);
 console.log(Array.isArray(myLibrary));
 console.log(myLibrary);
