@@ -84,9 +84,11 @@ function bookDisplay(array) {
     // Loops through myLibrary array to assign data to cards.
     for (i = 0; i < array.length; i++) {
 
-        card = document.createElement("card")
-        cards = document.querySelectorAll("[data-id]")
-
+        const card = document.createElement("div");
+        const addId = document.createAttribute("id");
+        addId.value = "card";
+        card.setAttributeNode(addId);
+        
         // Resets libraryDisplay before every loop to prevent repeated cards.
         card.textContent = ``;
 
@@ -100,7 +102,6 @@ function bookDisplay(array) {
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
         let removeButton = document.createElement("button");
-        let id = document.createElement("div")
         let bookId = document.createElement("data-id");
 
         // Add class names for each created element.
@@ -108,8 +109,7 @@ function bookDisplay(array) {
         bookAuthor.classList.add("bookAuthor");
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
-        id.classList.add("bookId")
-        card.classList.add("libraryBooks")
+        card.classList.add("cards")
         removeButton.classList.add("removeButton");
       
         // Assigns book contents to cards.
@@ -118,9 +118,7 @@ function bookDisplay(array) {
         card.appendChild(bookPages)
         card.appendChild(bookRead)
         card.appendChild(removeButton)
-        card.appendChild(id)
-        id.appendChild(bookId)
-        
+        card.appendChild(bookId)
         
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
@@ -133,8 +131,7 @@ function bookDisplay(array) {
         libraryDisplay.appendChild(card)
 
         document.addEventListener('DOMContentLoaded', () => {
-        let bookCard = bookid.dataset.id;
-        console.log(bookCard)
+            console.log(card.dataset.id);
         });
 
         // Shows remove icon when mouse hovers over remove button.
@@ -152,7 +149,6 @@ function bookDisplay(array) {
         // Removes card from library display.
         removeButton.addEventListener('click', removeCard)
             function removeCard() {
-                
 
                 }
 
@@ -162,7 +158,12 @@ function bookDisplay(array) {
             }
     }
 };
-    
+
+
+
+
+
+
 bookDisplay(myLibrary);
 console.log(Array.isArray(myLibrary));
 console.log(myLibrary);
