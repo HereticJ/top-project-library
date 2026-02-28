@@ -7,6 +7,7 @@ let questions = document.querySelector("#questionForm");
 let readYes = document.querySelector("#readYes");
 let readNo = document.querySelector("#readNo");
 let libraryDisplay = document.querySelector("#libraryDisplay");
+
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
@@ -61,12 +62,14 @@ submitButton.addEventListener('click', submitClick);
     function submitClick(event) {
         event.preventDefault();
         let questions = document.querySelector("#questionForm");
+
             // Evaluates whether 'Read' radio button is yes or no.
             if (readYes.checked == true) {
                 questions.elements[3].value = "Yes"
             } else {
                 questions.elements[3].value = "No"
             };
+
             // Takes form info and creates a new book object from its data.
             let userBook = new Book(questions.elements[0].value, 
                 questions.elements[1].value, questions.elements[2].value, 
@@ -85,8 +88,7 @@ function bookDisplay(array) {
     for (i = 0; i < array.length; i++) {
 
         const card = document.createElement("div");
-        const addId = document.createAttribute("id");
-        addId.value = "card";
+        const addId = document.createAttribute("data-id");
         card.setAttributeNode(addId);
         
         // Resets libraryDisplay before every loop to prevent repeated cards.
@@ -102,7 +104,6 @@ function bookDisplay(array) {
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
         let removeButton = document.createElement("button");
-        let bookId = document.createElement("data-id");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
@@ -118,14 +119,13 @@ function bookDisplay(array) {
         card.appendChild(bookPages)
         card.appendChild(bookRead)
         card.appendChild(removeButton)
-        card.appendChild(bookId)
         
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
         bookAuthor.textContent = array[i].author
         bookPages.textContent = array[i].pages + " Pages"
         bookRead.textContent = "Read? " + array[i].read
-        bookId.textContent = `${array[i].id}`
+        addId.textContent = `${array[i].id}`
         
         // Add book card to library display.
         libraryDisplay.appendChild(card)
@@ -146,15 +146,12 @@ function bookDisplay(array) {
                 removeButton.removeChild(iconShow) == false
             }
 
+        // FIND A WAY TO ACCESS MYlIBRARY ARRAY IN THIS FUNCTION.
         // Removes card from library display.
         removeButton.addEventListener('click', removeCard)
-            function removeCard() {
-
-                }
-
-        removeButton.addEventListener(`click`, removeBookFromLibrary)
-            function removeBookFromLibrary() {
-
+            function removeCard(array) {
+                const findBook = array.find(book => Book.id === card.dataset.id)
+                console.log(findBook)
             }
     }
 };
