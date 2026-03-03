@@ -1,6 +1,5 @@
 // Array of book objects.
 const myLibrary = [];
-console.log(Array.isArray(myLibrary));
 
 // DOM element select declarations.
 let questions = document.querySelector("#questionForm");
@@ -38,10 +37,7 @@ function Book(title, author, pages, read, id) {
 };
 
 // Writes Book object IDs to console.
-Book.prototype.showId = function() {
-    console.log(`${this.id}`)
-    return `${this.id}`
-};
+
 
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
@@ -50,8 +46,6 @@ const clockers = new Book("Clockers", "Richard Price", 732, "Yes");
 const it = new Book("It", "Stephen King", 6666, "No")
 
 myLibrary.push(fireworks, bloodMeridian, clockers, it);
-
-fireworks.showId();
 
 // Library array function for adding books.
 function addBookToLibrary() {
@@ -80,6 +74,8 @@ submitButton.addEventListener('click', submitClick);
     bookDisplay(myLibrary);
     }
 };
+
+console.log(myLibrary[0][id])
 
 // Visual book display.f
 function bookDisplay(array) {
@@ -149,17 +145,14 @@ function bookDisplay(array) {
         // FIND A WAY TO ACCESS MYlIBRARY ARRAY IN THIS FUNCTION.
         // Removes card from library display.
         removeButton.addEventListener('click', removeCard)
-            function removeCard(array) {
-                const findBook = array.find(book => Book.id === card.dataset.id)
-                console.log(findBook)
+            function removeCard(myLibrary) {
+                console.log(myLibrary[0])
+                if (myLibrary[i][id] == card.dataset.id) {
+                    myLibrary.splice(i, 1)
+                };
             }
     }
 };
-
-
-
-
-
 
 bookDisplay(myLibrary);
 console.log(Array.isArray(myLibrary));
