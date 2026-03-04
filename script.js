@@ -20,7 +20,8 @@ cancelButton.addEventListener("click", cancelClick)
 
 // Generates IDs for each book.
 function generateUUID() {
-    id = crypto.randomUUID()
+    const bookMap = new Map();
+    const id = `${ crypto.randomUUID() }`;
     return id;
 };
 
@@ -75,7 +76,9 @@ submitButton.addEventListener('click', submitClick);
     }
 };
 
-console.log(myLibrary[0][id])
+console.log(myLibrary[0].id)
+
+
 
 // Visual book display.f
 function bookDisplay(array) {
@@ -86,20 +89,22 @@ function bookDisplay(array) {
         const card = document.createElement("div");
         const addId = document.createAttribute("data-id");
         card.setAttributeNode(addId);
-        
-        // Resets libraryDisplay before every loop to prevent repeated cards.
-        card.textContent = ``;
+
+// FIND SOME WAY TO MAKE SURE LIBRARYDISPLAY IS EMPTIED BEFORE ADDING CARDS.
 
         // Create remove button image.
         let iconShow = document.createElement("img");
         iconShow.src='book-remove.svg';
+
+        // Initializes remove buttons.
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("removeButton");
 
         // Makes one card's contents per book.
         let bookTitle = document.createElement("h3");
         let bookAuthor = document.createElement("h5");
         let bookPages = document.createElement("p");
         let bookRead = document.createElement("p");
-        let removeButton = document.createElement("button");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
@@ -107,8 +112,7 @@ function bookDisplay(array) {
         bookPages.classList.add("bookPages");
         bookRead.classList.add("bookRead");
         card.classList.add("cards")
-        removeButton.classList.add("removeButton");
-      
+
         // Assigns book contents to cards.
         card.appendChild(bookTitle)
         card.appendChild(bookAuthor)
@@ -142,18 +146,14 @@ function bookDisplay(array) {
                 removeButton.removeChild(iconShow) == false
             }
 
-        // FIND A WAY TO ACCESS MYlIBRARY ARRAY IN THIS FUNCTION.
         // Removes card from library display.
-        removeButton.addEventListener('click', removeCard)
-            function removeCard(myLibrary) {
-                console.log(myLibrary[0])
-                if (myLibrary[i][id] == card.dataset.id) {
-                    myLibrary.splice(i, 1)
-                };
-            }
+        removeButton.addEventListener('click', removeBook)
+            function removeBook() {
+                let index = myLibrary.findIndex(myLibraryBook => myLibraryBook.id == card.dataset.id)
+                    myLibrary.splice(index, 1);
+                    libraryDisplay.removeChild(card);
+        }
     }
 };
 
 bookDisplay(myLibrary);
-console.log(Array.isArray(myLibrary));
-console.log(myLibrary);
