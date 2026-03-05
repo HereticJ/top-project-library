@@ -19,33 +19,29 @@
             method="post">
                 <p>
                 <legend>What book would you like to add?</legend>
-                    <label for="bookTitle">Title:</label>
+                    <label for="bookTitle">Title</label>
                         <br>
 
                     <input type="text" id="bookTitle" name="bookTitle" 
                     value="" placeholder="Book Title">
                         <br>
 
-                    <label for="bookAuthor">Author:</label>
+                    <label for="bookAuthor">Author</label>
                         <br>
 
                     <input type="text" id="bookAuthor" name="bookAuthor" 
                     value="" placeholder="Book Author">
                         <br>
 
-                    <label for="pageNum"># of Pages:</label>
+                    <label for="pageLength">Page Length:</label>
                         <br>
 
-                    <input type="number" name=pageNum step="1" min="1" 
+                    <input type="number" name=pageNum id="pageLength" step="1" min="1" 
                     max="20000" value="" placeholder="1">
                         <br>
 
-                    <input type="radio" id="readYes" name="read" value="Yes" />
-                    <label for="bookRead">I've read this</label>
-                        <br>
-
-                    <input type="radio" id="readNo" name="read" value="No" checked />
-                    <label for="bookUnread">I haven't read/finished this</label>
+                    <input type="checkbox" id="checkbox" name="read" value="Yes" />
+                    <label for="bookRead" id="read">I've read this</label>
                         <br>
 
                     <button type="reset" id="reset">Reset</button>

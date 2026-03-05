@@ -16,6 +16,48 @@
   gap: 20px;
 }
 
+legend {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input#bookTitle {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input#bookAuthor {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input#pageLength {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input#checkbox {
+  display: grid;
+  place-self: end;
+  margin-top: 15px;
+}
+
+button.checkButton {
+  display: grid;
+  place-self: end;
+
+}
+
+label#read {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button#reset {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .cards {
   display: grid;
   border: 1px solid black;
@@ -25,13 +67,12 @@
   grid-template-columns: 50px 100px 50px;
 }
 
-.bookTitle {
+h3.bookTitle {
   font-size: 24px;
   display: grid;
   grid-column-start: 2;
   grid-row-start: 1;
-  align-self: center;
-  justify-self: stretch;
+  place-self: center;
   margin: 0;
   padding-top: 10px;
 }
@@ -60,15 +101,14 @@
   padding-bottom: 5px;
 }
 
-.bookRead {
+p.bookRead {
+  font-size: 14px;
   display: grid;
   grid-column-start: 3;
   grid-row-start: 3;
+  align-self: start;
   justify-self: end;
-  align-self: end;
   margin: 0;
-  padding-right: 5px;
-  padding-bottom: 5px;
 }
 
 data-id {
@@ -97,5 +137,16 @@ button.removeButton {
   justify-self: end;
   margin-top: 5px;
   margin-right: 5px;
+  padding: 1px;
+}
+
+.checkButton {
+  height: 30px;
+  width: 30px;
+  grid-column-start: 3;
+  grid-row-start: 3;
+  place-self: end;
+  margin-bottom: 2px;
+  margin-right: 2px;
   padding: 1px;
 }

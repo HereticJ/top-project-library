@@ -28,7 +28,8 @@ function generateUUID() {
 // Book object constructor.
 function Book(title, author, pages, read, id) {
     if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor")
+        throw Error(
+            "You must use the 'new' operator to call the constructor")
     }
         this.title = title,
         this.author = author,
@@ -37,12 +38,10 @@ function Book(title, author, pages, read, id) {
         this.id = generateUUID(id)
 };
 
-// Writes Book object IDs to console.
-
-
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
-const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 351, "Yes");
+const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 
+    351, "Yes");
 const clockers = new Book("Clockers", "Richard Price", 732, "Yes");
 const it = new Book("It", "Stephen King", 6666, "No")
 
@@ -72,13 +71,10 @@ submitButton.addEventListener('click', submitClick);
                 `${generateUUID()}`);
         dialog.close();
         myLibrary.push(userBook);
+    deleteChildren();
     bookDisplay(myLibrary);
     }
 };
-
-console.log(myLibrary[0].id)
-
-
 
 // Visual book display.f
 function bookDisplay(array) {
@@ -90,15 +86,17 @@ function bookDisplay(array) {
         const addId = document.createAttribute("data-id");
         card.setAttributeNode(addId);
 
-// FIND SOME WAY TO MAKE SURE LIBRARYDISPLAY IS EMPTIED BEFORE ADDING CARDS.
-
         // Create remove button image.
-        let iconShow = document.createElement("img");
-        iconShow.src='book-remove.svg';
+        const removeIcon = document.createElement("img");
+        const checkIcon = document.createElement("img");
+        removeIcon.src='book-remove.svg';
+        checkIcon.src='check.svg';
 
-        // Initializes remove buttons.
+        // Initializes remove and read buttons.
         const removeButton = document.createElement("button");
+        const checkButton = document.createElement("button");
         removeButton.classList.add("removeButton");
+        checkButton.classList.add("checkButton");
 
         // Makes one card's contents per book.
         let bookTitle = document.createElement("h3");
@@ -119,41 +117,66 @@ function bookDisplay(array) {
         card.appendChild(bookPages)
         card.appendChild(bookRead)
         card.appendChild(removeButton)
+        card.appendChild(checkButton)
         
         // Assigns text for book details to each book card.        
         bookTitle.textContent = array[i].title
         bookAuthor.textContent = array[i].author
         bookPages.textContent = array[i].pages + " Pages"
-        bookRead.textContent = "Read? " + array[i].read
+        bookRead.textContent = "Read"
         addId.textContent = `${array[i].id}`
         
         // Add book card to library display.
         libraryDisplay.appendChild(card)
 
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log(card.dataset.id);
-        });
-
         // Shows remove icon when mouse hovers over remove button.
-        removeButton.addEventListener('mouseenter', showIcon)
-            function showIcon() {
-                removeButton.appendChild(iconShow) == true 
-            }
+        removeButton.addEventListener('mouseenter', showRemoveIcon)
+            function showRemoveIcon() {
+                removeButton.appendChild(removeIcon) == true 
+            };
 
         // Hides remove icon when mouse hovers outside button area.
-        removeButton.addEventListener('mouseleave', hideIcon)
-            function hideIcon() {
-                removeButton.removeChild(iconShow) == false
-            }
+        removeButton.addEventListener('mouseleave', hideRemoveIcon)
+            function hideRemoveIcon() {
+                removeButton.removeChild(removeIcon) == false
+            };
 
         // Removes card from library display.
         removeButton.addEventListener('click', removeBook)
             function removeBook() {
-                let index = myLibrary.findIndex(myLibraryBook => myLibraryBook.id == card.dataset.id)
+                let index = myLibrary.findIndex(myLibraryBook => myLibraryBook.id 
+                    == card.dataset.id);
                     myLibrary.splice(index, 1);
                     libraryDisplay.removeChild(card);
-        }
+                };
+
+        // Shows check icon on mouse hover over check button.
+        checkButton.addEventListener('mouseenter', showCheckIcon)
+                function showCheckIcon() {
+                    checkButton.appendChild(checkIcon) == true
+                };
+
+        // Removes check icon when mouse hovers outside check button.
+        checkButton.addEventListener('mouseleave', hideCheckIcon)
+                function hideCheckIcon() {
+                    checkButton.removeChild(checkIcon) == false
+                };
+        checkButton.addEventListener('click', toggleRead)
+                function toggleRead() {
+
+                }
     }
 };
 
+function deleteChildren() {
+    let child = libraryDisplay.lastElementChild;
+    while (child) {
+        libraryDisplay.removeChild(child);
+        child = libraryDisplay.lastElementChild;
+    }
+}
+
 bookDisplay(myLibrary);
+
+// git commit message: fixed bug that repeated cards when user adds book,
+// replaced read radio buttons with checkbox button.
