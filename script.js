@@ -2,11 +2,9 @@
 const myLibrary = [];
 
 // DOM element select declarations.
-let questions = document.querySelector("#questionForm");
-let readYes = document.querySelector("#readYes");
-let readNo = document.querySelector("#readNo");
-let libraryDisplay = document.querySelector("#libraryDisplay");
-
+const questions = document.querySelector("#questionForm");
+const readChecked = document.querySelector("#read");
+const libraryDisplay = document.querySelector("#libraryDisplay");
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
 const cancelButton = document.querySelector("#cancel");
@@ -20,7 +18,6 @@ cancelButton.addEventListener("click", cancelClick)
 
 // Generates IDs for each book.
 function generateUUID() {
-    const bookMap = new Map();
     const id = `${ crypto.randomUUID() }`;
     return id;
 };
@@ -39,11 +36,11 @@ function Book(title, author, pages, read, id) {
 };
 
 // Example books.
-const fireworks = new Book("Fireworks", "Josh Grant", 435, "No");
+const fireworks = new Book("Fireworks", "Josh Grant", 435, "no");
 const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 
-    351, "Yes");
-const clockers = new Book("Clockers", "Richard Price", 732, "Yes");
-const it = new Book("It", "Stephen King", 6666, "No")
+    351, "yes");
+const clockers = new Book("Clockers", "Richard Price", 732, "yes");
+const it = new Book("It", "Stephen King", 6666, "no")
 
 myLibrary.push(fireworks, bloodMeridian, clockers, it);
 
@@ -56,13 +53,6 @@ submitButton.addEventListener('click', submitClick);
     function submitClick(event) {
         event.preventDefault();
         let questions = document.querySelector("#questionForm");
-
-            // Evaluates whether 'Read' radio button is yes or no.
-            if (readYes.checked == true) {
-                questions.elements[3].value = "Yes"
-            } else {
-                questions.elements[3].value = "No"
-            };
 
             // Takes form info and creates a new book object from its data.
             let userBook = new Book(questions.elements[0].value, 
@@ -82,8 +72,10 @@ function bookDisplay(array) {
     // Loops through myLibrary array to assign data to cards.
     for (i = 0; i < array.length; i++) {
 
+        // Initializes cards and sets data attribute with ID.
         const card = document.createElement("div");
         const addId = document.createAttribute("data-id");
+        const addReadStatus = document.createAttribute("data-read");
         card.setAttributeNode(addId);
 
         // Create remove button image.
@@ -99,10 +91,10 @@ function bookDisplay(array) {
         checkButton.classList.add("checkButton");
 
         // Makes one card's contents per book.
-        let bookTitle = document.createElement("h3");
-        let bookAuthor = document.createElement("h5");
-        let bookPages = document.createElement("p");
-        let bookRead = document.createElement("p");
+        const bookTitle = document.createElement("h3");
+        const bookAuthor = document.createElement("h5");
+        const bookPages = document.createElement("p");
+        const bookRead = document.createElement("p");
 
         // Add class names for each created element.
         bookTitle.classList.add("bookTitle");
@@ -112,20 +104,20 @@ function bookDisplay(array) {
         card.classList.add("cards")
 
         // Assigns book contents to cards.
-        card.appendChild(bookTitle)
-        card.appendChild(bookAuthor)
-        card.appendChild(bookPages)
-        card.appendChild(bookRead)
-        card.appendChild(removeButton)
-        card.appendChild(checkButton)
+        card.appendChild(bookTitle);
+        card.appendChild(bookAuthor);
+        card.appendChild(bookPages);
+        card.appendChild(bookRead);
+        card.appendChild(removeButton);
+        card.appendChild(checkButton);
         
         // Assigns text for book details to each book card.        
-        bookTitle.textContent = array[i].title
-        bookAuthor.textContent = array[i].author
-        bookPages.textContent = array[i].pages + " Pages"
-        bookRead.textContent = "Read"
-        addId.textContent = `${array[i].id}`
-        
+        bookTitle.textContent = array[i].title;
+        bookAuthor.textContent = array[i].author;
+        bookPages.textContent = array[i].pages + " Pages";
+        bookRead.textContent = "Read?";
+        addId.textContent = `${array[i].id}`;
+
         // Add book card to library display.
         libraryDisplay.appendChild(card)
 
@@ -156,15 +148,18 @@ function bookDisplay(array) {
                     checkButton.appendChild(checkIcon) == true
                 };
 
-        // Removes check icon when mouse hovers outside check button.
+        // Removes check icon when mouse hovers outside check 
+        // button.
         checkButton.addEventListener('mouseleave', hideCheckIcon)
                 function hideCheckIcon() {
                     checkButton.removeChild(checkIcon) == false
                 };
+
         checkButton.addEventListener('click', toggleRead)
                 function toggleRead() {
-
-                }
+                    bookReadCheck = "yes"
+                    checkButton.appendChild(checkIcon)
+                };
     }
 };
 
@@ -178,5 +173,4 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: fixed bug that repeated cards when user adds book,
-// replaced read radio buttons with checkbox button.
+// git commit message: 

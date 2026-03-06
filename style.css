@@ -109,6 +109,7 @@ p.bookRead {
   align-self: start;
   justify-self: end;
   margin: 0;
+  padding-right: 3px;
 }
 
 data-id {
