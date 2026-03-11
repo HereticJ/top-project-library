@@ -3,7 +3,6 @@ const myLibrary = [];
 
 // DOM element select declarations.
 const questions = document.querySelector("#questionForm");
-const readChecked = document.querySelector("#read");
 const libraryDisplay = document.querySelector("#libraryDisplay");
 const newButton = document.querySelector("#newButton");
 const submitButton = document.querySelector("#submit");
@@ -12,7 +11,7 @@ const dialog = document.querySelector("dialog");
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
-    function cancelClick(event) {
+    function cancelClick() {
         dialog.close();
     };
 
@@ -36,11 +35,11 @@ function Book(title, author, pages, read, id) {
 };
 
 // Example books.
-const fireworks = new Book("Fireworks", "Josh Grant", 435, "no");
+const fireworks = new Book("Fireworks", "Josh Grant", 435, false);
 const bloodMeridian = new Book("Blood Meridian", "Cormac McCarthy", 
-    351, "yes");
-const clockers = new Book("Clockers", "Richard Price", 732, "yes");
-const it = new Book("It", "Stephen King", 6666, "no")
+    351, true);
+const clockers = new Book("Clockers", "Richard Price", 732, true);
+const it = new Book("It", "Stephen King", 6666, false)
 
 myLibrary.push(fireworks, bloodMeridian, clockers, it);
 
@@ -59,6 +58,7 @@ submitButton.addEventListener('click', submitClick);
                 questions.elements[1].value, questions.elements[2].value, 
                 questions.elements[3].value, 
                 `${generateUUID()}`);
+
         dialog.close();
         myLibrary.push(userBook);
     deleteChildren();
@@ -75,7 +75,6 @@ function bookDisplay(array) {
         // Initializes cards and sets data attribute with ID.
         const card = document.createElement("div");
         const addId = document.createAttribute("data-id");
-        const addReadStatus = document.createAttribute("data-read");
         card.setAttributeNode(addId);
 
         // Create remove button image.
@@ -118,6 +117,12 @@ function bookDisplay(array) {
         bookRead.textContent = "Read?";
         addId.textContent = `${array[i].id}`;
 
+        if (array[i].read === false) {
+            checkButton.checked = false;
+        } else {
+            checkButton.checked = true;
+        }
+
         // Add book card to library display.
         libraryDisplay.appendChild(card)
 
@@ -141,25 +146,42 @@ function bookDisplay(array) {
                     myLibrary.splice(index, 1);
                     libraryDisplay.removeChild(card);
                 };
+        
+        // Checks read status of card and shows checkbox icon when button
+        // is hovered over.
+        if (checkButton.checked === false) {
+            // Shows check icon on mouse hover over check button.
+            checkButton.addEventListener('mouseenter', showCheckIcon)
+                    function showCheckIcon() {
+                        checkButton.appendChild(checkIcon) === true
+                    };
 
-        // Shows check icon on mouse hover over check button.
-        checkButton.addEventListener('mouseenter', showCheckIcon)
-                function showCheckIcon() {
-                    checkButton.appendChild(checkIcon) == true
-                };
-
-        // Removes check icon when mouse hovers outside check 
-        // button.
-        checkButton.addEventListener('mouseleave', hideCheckIcon)
-                function hideCheckIcon() {
-                    checkButton.removeChild(checkIcon) == false
-                };
-
-        checkButton.addEventListener('click', toggleRead)
-                function toggleRead() {
-                    bookReadCheck = "yes"
+            // Removes check icon when mouse hovers outside check 
+            // button.
+            checkButton.addEventListener('mouseleave', hideCheckIcon)
+                    function hideCheckIcon() {
+                        checkButton.removeChild(checkIcon) === false
+                    };
+            
+            // Toggles check icon on card and sets myLibrary array object
+            // book read status to true.
+            checkButton.addEventListener('click', toggleReadOn)
+                function toggleReadOn() {
                     checkButton.appendChild(checkIcon)
+                    myLibrary[i][read] = true;
                 };
+
+        // Toggles card and myLibrary book object read status to false when
+        // clicked when read status is set to true.
+        } else if (checkButton.checked === true) {
+            checkButton.appendChild(checkIcon)
+            checkButton.addEventListener('click', toggleReadOff)
+                function toggleReadOff() {
+                    checkButton.removeChild(checkIcon)
+                    myLibrary[i].read = false;
+            }
+        }
+
     }
 };
 
@@ -173,4 +195,4 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: 
+// git commit message: Added checkbox functionality to cards.
