@@ -117,12 +117,24 @@ function bookDisplay(array) {
         bookRead.textContent = "Read?";
         addId.textContent = `${array[i].id}`;
 
+        // Checks read status of card and shows checkbox icon when button
+        // is hovered over.
         if (array[i].read === false) {
             checkButton.checked = false;
-        } else {
-            checkButton.checked = true;
-        }
+            // Shows check icon on mouse hover over check button.
+            checkButton.addEventListener('mouseenter', showCheckIcon)
+                function showCheckIcon() {
+                    checkButton.appendChild(checkIcon) == true
+                };
 
+            // Removes check icon when mouse hovers outside check 
+            // button.
+            checkButton.addEventListener('mouseleave', hideCheckIcon)
+                function hideCheckIcon() {
+                    checkButton.removeChild(checkIcon) == false
+                };
+        }
+    
         // Add book card to library display.
         libraryDisplay.appendChild(card)
 
@@ -138,52 +150,33 @@ function bookDisplay(array) {
                 removeButton.removeChild(removeIcon) == false
             };
 
-        // Removes card from library display.
+        // Removes card from library display and myLibrary array.
         removeButton.addEventListener('click', removeBook)
             function removeBook() {
                 let index = myLibrary.findIndex(myLibraryBook => myLibraryBook.id 
                     == card.dataset.id);
                     myLibrary.splice(index, 1);
                     libraryDisplay.removeChild(card);
-                };
+            };
         
-        // Checks read status of card and shows checkbox icon when button
-        // is hovered over.
-        if (checkButton.checked === false) {
-            // Shows check icon on mouse hover over check button.
-            checkButton.addEventListener('mouseenter', showCheckIcon)
-                    function showCheckIcon() {
-                        checkButton.appendChild(checkIcon) === true
-                    };
-
-            // Removes check icon when mouse hovers outside check 
-            // button.
-            checkButton.addEventListener('mouseleave', hideCheckIcon)
-                    function hideCheckIcon() {
-                        checkButton.removeChild(checkIcon) === false
-                    };
-            
-            // Toggles check icon on card and sets myLibrary array object
-            // book read status to true.
-            checkButton.addEventListener('click', toggleReadOn)
-                function toggleReadOn() {
-                    checkButton.appendChild(checkIcon)
-                    myLibrary[i][read] = true;
-                };
-
-        // Toggles card and myLibrary book object read status to false when
-        // clicked when read status is set to true.
-        } else if (checkButton.checked === true) {
-            checkButton.appendChild(checkIcon)
-            checkButton.addEventListener('click', toggleReadOff)
-                function toggleReadOff() {
-                    checkButton.removeChild(checkIcon)
-                    myLibrary[i].read = false;
+        // Toggles check icon on card and sets myLibrary array object
+        // book read status to true.
+        checkButton.addEventListener('click', toggleRead)
+            function toggleRead() {
+                if (myLibrary.read = true) {
+                    checkButton.checked = true;
+                } else if (array[i].read === true) {
+                checkButton.checked = true;
+                checkButton.appendChild(checkIcon)
+                checkButton.addEventListener('click', toggleReadOff)
+                    function toggleReadOff() {
+                        checkButton.removeChild(checkIcon)
+                        checkButton.checked = false
+                    }
+                }
             }
         }
-
-    }
-};
+}
 
 function deleteChildren() {
     let child = libraryDisplay.lastElementChild;
@@ -195,4 +188,4 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: Added checkbox functionality to cards.
+// git commit message: Fuck me.
