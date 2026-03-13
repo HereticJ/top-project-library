@@ -117,64 +117,60 @@ function bookDisplay(array) {
         bookRead.textContent = "Read?";
         addId.textContent = `${array[i].id}`;
 
+        // Add book card to library display.
+        libraryDisplay.appendChild(card)
+
         // Checks read status of card and shows checkbox icon when button
         // is hovered over.
         if (array[i].read === false) {
-            checkButton.checked = false;
+
             // Shows check icon on mouse hover over check button.
             checkButton.addEventListener('mouseenter', showCheckIcon)
                 function showCheckIcon() {
-                    checkButton.appendChild(checkIcon) == true
+                    checkButton.appendChild(checkIcon)
                 };
 
             // Removes check icon when mouse hovers outside check 
             // button.
             checkButton.addEventListener('mouseleave', hideCheckIcon)
                 function hideCheckIcon() {
-                    checkButton.removeChild(checkIcon) == false
+                    checkButton.removeChild(checkIcon)
                 };
-        }
-    
-        // Add book card to library display.
-        libraryDisplay.appendChild(card)
+            
+        } else if (array[i].read === true) {
+            checkButton.checked = true;
+            checkButton.appendChild(checkIcon);
+        };
+
+        // Toggles check icon on card when clicked.
+        checkButton.addEventListener('click', toggleRead)
+            function toggleRead() {
+                if ([i][1].read == true) {
+                    [i][1].read = false
+                }
+            };
 
         // Shows remove icon when mouse hovers over remove button.
         removeButton.addEventListener('mouseenter', showRemoveIcon)
             function showRemoveIcon() {
-                removeButton.appendChild(removeIcon) == true 
+                removeButton.appendChild(removeIcon)
             };
 
         // Hides remove icon when mouse hovers outside button area.
         removeButton.addEventListener('mouseleave', hideRemoveIcon)
             function hideRemoveIcon() {
-                removeButton.removeChild(removeIcon) == false
+                removeButton.removeChild(removeIcon)
             };
 
         // Removes card from library display and myLibrary array.
         removeButton.addEventListener('click', removeBook)
             function removeBook() {
-                let index = myLibrary.findIndex(myLibraryBook => myLibraryBook.id 
-                    == card.dataset.id);
+                let index = myLibrary.findIndex(myLibraryBook => 
+                    myLibraryBook.id == card.dataset.id);
                     myLibrary.splice(index, 1);
                     libraryDisplay.removeChild(card);
             };
         
-        // Toggles check icon on card and sets myLibrary array object
-        // book read status to true.
-        checkButton.addEventListener('click', toggleRead)
-            function toggleRead() {
-                if (myLibrary.read = true) {
-                    checkButton.checked = true;
-                } else if (array[i].read === true) {
-                checkButton.checked = true;
-                checkButton.appendChild(checkIcon)
-                checkButton.addEventListener('click', toggleReadOff)
-                    function toggleReadOff() {
-                        checkButton.removeChild(checkIcon)
-                        checkButton.checked = false
-                    }
-                }
-            }
         }
 }
 
@@ -188,4 +184,4 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: Fuck me.
+// git commit message:
