@@ -5,11 +5,10 @@ const myLibrary = [];
 const questions = document.querySelector("#questionForm");
 const libraryDisplay = document.querySelector("#libraryDisplay");
 const newButton = document.querySelector("#newButton");
-const submitButton = document.querySelector("#submit");
+const submitButton = document.querySelector("#submitBook");
 const cancelButton = document.querySelector("#cancel");
 const dialog = document.querySelector("dialog");
 const checkRead = document.querySelector("#read");
-const questionsReset = document.querySelector("#reset");
 
 // Cancel modal.
 cancelButton.addEventListener("click", cancelClick)
@@ -21,6 +20,12 @@ cancelButton.addEventListener("click", cancelClick)
 function generateUUID() {
     const id = `${ crypto.randomUUID() }`
     return id
+};
+
+// Erases question form.
+function resetForm() {
+    const form = document.querySelector("#questionForm");
+    form.reset();
 };
 
 // Book object constructor.
@@ -53,19 +58,20 @@ function addBookToLibrary() {
 submitButton.addEventListener('click', submitClick)
     function submitClick(event) {
         event.preventDefault()
-        let questions = document.querySelector("#questionForm")
 
         // Takes form info and creates a new book object from its data.
         let userBook = new Book(questions.elements[0].value, 
             questions.elements[1].value, questions.elements[2].value, 
             checkRead.checked,`${generateUUID()}`)
         
-        // FIND WAY TO RESET QUESTIONS AFTER FIRST USER BOOK TO 
-        // PREVENT REPEATED BOOKS FROM APPEARING.
-        dialog.close()
+        // FIND WAY TO PREVENT SUBMIT FROM ADDING +1 TO SUBSEQUENT SUBMITS.
+
         myLibrary.push(userBook)
+        console.log(userBook);
+        resetForm()
         deleteChildren()
         bookDisplay(myLibrary)
+        dialog.close()
     }
 };
 
@@ -206,4 +212,4 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: 
+// git commit message: Fixed form entries remaining after userBook is added.
