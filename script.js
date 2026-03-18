@@ -213,6 +213,3 @@ function deleteChildren() {
 };
 
 bookDisplay(myLibrary);
-
-// git commit message: Fixed blank cards being added to library display
-// after multiple submissions. Project (finally) done!
