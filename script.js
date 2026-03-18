@@ -24,8 +24,8 @@ function generateUUID() {
 
 // Erases question form.
 function resetForm() {
-    const form = document.querySelector("#questionForm");
-    form.reset();
+    const form = document.querySelector("#questionForm")
+    form.reset()
 };
 
 // Book object constructor.
@@ -54,25 +54,26 @@ myLibrary.push(fireworks, bloodMeridian, clockers, it);
 function addBookToLibrary() {
     dialog.showModal()
 
-// take params, create a book then store it in the array.
-submitButton.addEventListener('click', submitClick)
-    function submitClick(event) {
-        event.preventDefault()
+    // take parameters, create a book then store it in the array.
+    submitButton.addEventListener('click', submitClick)
+        function submitClick(event) {
+            event.preventDefault()
+            
+            // Takes form info and creates a new book object from its data.
+            let userBook = new Book(questions.elements[0].value, 
+                questions.elements[1].value, questions.elements[2].value, 
+                checkRead.checked,`${generateUUID()}`)
 
-        // Takes form info and creates a new book object from its data.
-        let userBook = new Book(questions.elements[0].value, 
-            questions.elements[1].value, questions.elements[2].value, 
-            checkRead.checked,`${generateUUID()}`)
-        
-        // FIND WAY TO PREVENT SUBMIT FROM ADDING +1 TO SUBSEQUENT SUBMITS.
-
-        myLibrary.push(userBook)
-        console.log(userBook);
-        resetForm()
-        deleteChildren()
-        bookDisplay(myLibrary)
-        dialog.close()
-    }
+            // Ensures cards have data before adding them to library display..
+            if (userBook.title !== "") {
+                myLibrary.push(userBook)
+                console.log(userBook)
+                resetForm()
+                deleteChildren()
+                bookDisplay(myLibrary)
+                dialog.close()
+            }
+        }
 };
 
 // Visual book display.f
@@ -158,6 +159,7 @@ function bookDisplay(array) {
                         checkButton.removeChild(checkIcon)
                     };
 
+        // Checks if read status is checked before appending read icon.
         } else if (array[i].read === true) {
 
             // Sets card read checkbox to read if library book 
@@ -212,4 +214,5 @@ function deleteChildren() {
 
 bookDisplay(myLibrary);
 
-// git commit message: Fixed form entries remaining after userBook is added.
+// git commit message: Fixed blank cards being added to library display
+// after multiple submissions. Project (finally) done!

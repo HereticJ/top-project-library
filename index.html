@@ -8,10 +8,7 @@
     <title>Project: Library</title>
 </head>
 <body>
-    <div id="newButton">
-        <button autofocus class="addBook" onclick="addBookToLibrary()"
-        >Add New Book</button>
-    </div>
+
 
     <dialog id="addBook">
         <h2>Add a Book</h2>
@@ -57,10 +54,17 @@
                 </div>
             </form>
     </dialog>
-        <div id="pageTitle">
-            <h1>Your Library:</h1>
+        <div id="header">
+            <div id="pageTitle">
+                <h1>Your Library</h1>
+            </div>
+            <div id="newButton">
+                <button autofocus class="addBook" onclick="addBookToLibrary()"
+                >Add New Book</button>
+            </div>
         </div>
-        <div id="libraryDisplay">
+            <div id="libraryDisplay">
+            </div>
         </div>
 </body>
 </html>
