@@ -28,6 +28,7 @@ function resetForm() {
     form.reset()
 };
 
+/*
 // Book object constructor.
 function Book(title, author, pages, read, id) {
     if (!new.target) {
@@ -40,6 +41,18 @@ function Book(title, author, pages, read, id) {
         this.read = read,
         this.id = generateUUID(id)
 };
+*/
+
+class Book {
+    constructor(title, author, pages, read, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = generateUUID(id);
+    }
+}
+
 
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, false);
