@@ -28,7 +28,7 @@ function resetForm() {
     form.reset()
 };
 
-// Book object constructor.
+// Book object constructor. CHANGE THIS TO CLASS!
 function Book(title, author, pages, read, id) {
     if (!new.target) {
         throw Error(
