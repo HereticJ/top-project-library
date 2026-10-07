@@ -28,18 +28,23 @@ function resetForm() {
     form.reset()
 };
 
-// Book object constructor. CHANGE THIS TO CLASS!
-function Book(title, author, pages, read, id) {
+// Book Class to add books.
+class Book {
+    constructor(title, author, pages, read, id) {
+    /*
     if (!new.target) {
         throw Error(
             "You must use the 'new' operator to call the constructor")
     }
+            */
         this.title = title,
         this.author = author,
         this.pages = pages,
         this.read = read,
         this.id = generateUUID(id)
+    };
 };
+
 
 // Example books.
 const fireworks = new Book("Fireworks", "Josh Grant", 435, false);
